@@ -231,7 +231,6 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
     }
 }
 
-
 void cmdLD(char* filetxt, deck* deck, messages* display){
     FILE *file = fopen(filetxt, "r");
     if(file != NULL) {
