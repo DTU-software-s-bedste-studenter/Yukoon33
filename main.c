@@ -39,7 +39,7 @@ typedef struct gameState gameState;
 void printInitialView();
 void printCurrentView(deck*, messages*);
 void deckInit(deck);
-void shuffel(deck);
+void shuffle(deck);
 void takeInput(char*);
 
 int evaluateCmd(char*, deck*, messages*);
@@ -52,6 +52,7 @@ void cmdSR(deck*, deck*);
 int randomNum();
 
 int main(void) {
+    setvbuf(stdout, NULL, _IONBF, 0);
     printInitialView();
     deck firstDeck = {};
     deck *deckptr = &firstDeck;
@@ -179,7 +180,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         char filetxt[20];
         for (int i = 0; i < 20; i++) {
             filetxt[i] = command[i + 3];
-            if (command[i + 3] == '\n') {
+            if (command[i + 3] == '\n' || command[i + 2] == '\n') {
                 filetxt[i] = '\0';
                 break;
             }
@@ -248,6 +249,15 @@ void cmdLD(char* filetxt, deck* deck, messages* display){
             deck->deck[i].suit = (suit) card[1];
             deck->deck[i].visible = card[2] - 48;
         }
+    }else if(filetxt[0] = '\0') {
+        file = fopen("factoryDeck.txt", "r");
+            for (int i = 0; i < 52; i++) {
+                char card[5];
+                fgets(card, sizeof(card), file);
+                deck->deck[i].number = card[0];
+                deck->deck[i].suit = (suit) card[1];
+                deck->deck[i].visible = card[2] - 48;
+            }
     } else{
         display->lastCmd = "LD";
         display->message = "File doesn't exist";
