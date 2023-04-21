@@ -1,9 +1,3 @@
-<<<<<<< HEAD
 C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/Yukoon33.dir
 C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-=======
-/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/Yukoon33.dir
-/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/rebuild_cache.dir
->>>>>>> 3871d3d78c08c681fd5eb47a10cc007bcbab4792

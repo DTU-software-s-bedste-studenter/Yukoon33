@@ -8,7 +8,6 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-<<<<<<< HEAD
 				<Option working_dir="C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
@@ -21,25 +20,10 @@
 			<Target title="Yukoon33">
 				<Option output="C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/Yukoon33.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug"/>
-=======
-				<Option working_dir="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Yukoon33">
-				<Option output="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Yukoon33" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug"/>
->>>>>>> 3871d3d78c08c681fd5eb47a10cc007bcbab4792
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-<<<<<<< HEAD
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
@@ -55,28 +39,10 @@
 			<Target title="Yukoon33/fast">
 				<Option output="C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/Yukoon33.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug"/>
-=======
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 Yukoon33"/>
-					<CompileFile command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Yukoon33/fast">
-				<Option output="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Yukoon33" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug"/>
->>>>>>> 3871d3d78c08c681fd5eb47a10cc007bcbab4792
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-<<<<<<< HEAD
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/../../../../include"/>
 					<Add directory="C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed"/>
@@ -114,45 +80,6 @@
 			<Option target="Yukoon33"/>
 		</Unit>
 		<Unit filename="C:/Users/ansi1/CLionProjects/Yukoon33/CMakeLists.txt">
-=======
-					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/14.0.0/include"/>
-					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
-					<Add directory="/System/Library/Frameworks"/>
-					<Add directory="/Library/Frameworks"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 Yukoon33/fast"/>
-					<CompileFile command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/Users/matt/CLionProjects/Yukoon33/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/opt/homebrew/bin/gmake -j10 -f &quot;/Users/matt/CLionProjects/Yukoon33/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-		</Build>
-		<Unit filename="/Users/matt/CLionProjects/Yukoon33/main.c">
-			<Option target="Yukoon33"/>
-		</Unit>
-		<Unit filename="/Users/matt/CLionProjects/Yukoon33/CMakeLists.txt">
->>>>>>> 3871d3d78c08c681fd5eb47a10cc007bcbab4792
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

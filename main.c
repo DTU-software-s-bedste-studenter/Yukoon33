@@ -180,7 +180,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         char filetxt[20];
         for (int i = 0; i < 20; i++) {
             filetxt[i] = command[i + 3];
-            if (command[i + 3] == '\n' || command[i + 2] == '\n') {
+            if (command[i + 3] == '\n' || command[2] == '\n') {
                 filetxt[i] = '\0';
                 break;
             }
@@ -249,7 +249,7 @@ void cmdLD(char* filetxt, deck* deck, messages* display){
             deck->deck[i].suit = (suit) card[1];
             deck->deck[i].visible = card[2] - 48;
         }
-    }else if(filetxt[0] = '\0') {
+    }else if(filetxt[0] == '\0') {
         file = fopen("factoryDeck.txt", "r");
             for (int i = 0; i < 52; i++) {
                 char card[5];
