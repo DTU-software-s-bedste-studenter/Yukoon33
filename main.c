@@ -47,6 +47,7 @@ void cmdLD(char*, deck*,  messages*);
 void cmdSW(deck*);
 void cmdSI(deck*, int);
 int cmdQQ();
+void cmdSR(deck*, deck*);
 
 int randomNum();
 
@@ -224,6 +225,12 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         display->lastCmd = "SI";
         display->message = "OK";
     }
+    else if(command[1] == 'R'){
+
+        cmdSR(deck, deck);
+        display->lastCmd = "SR";
+        display->message = "OK";
+    }
 
     if (command[0] == 'Q' && command[1] == 'Q') {
         display->message = "OK - BYE";
@@ -299,17 +306,26 @@ void cmdSI(deck* deck, int split){
         }
     }
 
-
 }
+
+
 
 int cmdQQ(){
     return 0;
 }
 
+void cmdSR(deck* input, deck* ref){
+    card newDeck[52];
+    for (int i = 0; i < 52; i++){
+        newDeck[randomNum()] = input->deck[i];
+    }
+    ref = &newDeck;
+}
+
 // Utility functions here:
 
 int randomNum(){
-    return (rand() % 51);
+    return (rand() % 52);
 }
 
 //LD factoryDeck.txt
