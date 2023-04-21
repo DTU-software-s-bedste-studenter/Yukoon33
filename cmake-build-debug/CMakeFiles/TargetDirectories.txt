@@ -1,0 +1,3 @@
+C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/Yukoon33.dir
+C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/ansi1/CLionProjects/Yukoon33/cmake-build-debug/CMakeFiles/rebuild_cache.dir
