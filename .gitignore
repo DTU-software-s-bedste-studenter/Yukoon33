@@ -1,3 +1,19 @@
+# In this project we generate files without extensions, 
+# and do ignore those we added the following:
+
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/
+
+#---------------------------
+
+# IDE files
+/.idea
+/cmake-build-debug
+
 # Prerequisites
 *.d
 
