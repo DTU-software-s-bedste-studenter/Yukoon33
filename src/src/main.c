@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "src/headders/view.h"
-#include "src/headders/cmds.h"
+#include "../headders/view.h"
+#include "../headders/cmds.h"
 
 
 int main(void) {

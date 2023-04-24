@@ -32,7 +32,8 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         display->lastCmd = "SW";
         display->message = "OK";
         return 1;
-    } else if(command[1] == 'I') {
+    }
+    else if(command[1] == 'I') {
         char numbers[3];
         for (int i = 0; i < 3; i++) {
             if (command[i + 3] == '\n') {
@@ -63,7 +64,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
     }
     else if(command[1] == 'R'){
 
-        cmdSR(deck, deck);
+        cmdSR(deck);
         display->lastCmd = "SR";
         display->message = "OK";
     }
@@ -159,10 +160,11 @@ int cmdQQ(){
     return 0;
 }
 
-void cmdSR(deck* input, deck* ref){
-    card newDeck[52];
+void cmdSR(deck* input){
     for (int i = 0; i < 52; i++){
-        newDeck[randomNum()] = input->deck[i];
+        int rand = randomNum();
+        card tempCard = input->deck[i];
+        input->deck[i] = input->deck[rand];
+        input->deck[rand] = tempCard;
     }
-    ref = &newDeck;
 }

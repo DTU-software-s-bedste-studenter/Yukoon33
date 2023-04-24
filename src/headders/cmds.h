@@ -13,5 +13,5 @@ void cmdLD(char*, deck*,  messages*);
 void cmdSW(deck*);
 void cmdSI(deck*, int);
 int cmdQQ();
-void cmdSR(deck*, deck*);
+void cmdSR(deck*);
 #endif //YUKOON33_CMDS_H
