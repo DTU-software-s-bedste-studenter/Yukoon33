@@ -2,7 +2,7 @@
 // Created by Anthon Hertz Bie on 23/04/2023.
 //
 
-#include "../headders/cmds.h"
+#include "../headders/initcmds.h"
 /**
  * A function meant to evaluating commands.
  * @param command the command string.
@@ -33,7 +33,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         display->message = "OK";
         return 1;
     }
-    else if(command[1] == 'I') {
+    if(command[0] == 'S' && command[1] == 'I') {
         char numbers[3];
         for (int i = 0; i < 3; i++) {
             if (command[i + 3] == '\n') {
@@ -62,10 +62,22 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         display->lastCmd = "SI";
         display->message = "OK";
     }
-    else if(command[1] == 'R'){
-
+    if(command[0] == 'S' && command[1] == 'R'){
         cmdSR(deck);
         display->lastCmd = "SR";
+        display->message = "OK";
+    }
+    if(command[0] == 'S' && command[1] == 'D'){
+        char filetxt[20];
+        for (int i = 0; i < 20; i++) {
+            filetxt[i] = command[i + 3];
+            if (command[i + 3] == '\n' || command[2] == '\n') {
+                filetxt[i] = '\0';
+                break;
+            }
+        }
+        cmdSD(deck, filetxt);
+        display->lastCmd = "SD";
         display->message = "OK";
     }
 
@@ -154,12 +166,6 @@ void cmdSI(deck* deck, int split){
 
 }
 
-
-
-int cmdQQ(){
-    return 0;
-}
-
 void cmdSR(deck* input){
     for (int i = 0; i < 52; i++){
         int rand = randomNum();
@@ -168,3 +174,23 @@ void cmdSR(deck* input){
         input->deck[rand] = tempCard;
     }
 }
+
+void cmdSD(deck* currentdeck, char* filename){
+    FILE* file;
+    if (filename[0] == '\0'){
+        file = fopen("savedDeck", "w");
+    } else {
+        file = fopen(filename, "w");
+    }
+    for(int i = 0; i < 52; i++) {
+        fputc(currentdeck->deck[i].number, file);
+        fputc(currentdeck->deck[i].suit, file);
+        fputc(currentdeck->deck[i].visible, file);
+        fputc('\n', file);
+    }
+}
+
+int cmdQQ(){
+    return 0;
+}
+

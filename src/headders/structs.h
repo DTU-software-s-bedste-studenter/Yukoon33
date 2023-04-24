@@ -26,7 +26,13 @@ typedef struct messages{
     char* message;
 } messages;
 
+typedef enum phase{
+    I = 'I', //Inital phase
+    G = 'G'  //Game phase
+} phase;
+
 typedef struct gameState{
+    phase currentPhase;
     deck currentDeck;
     char* message;
     char* lastCommand;

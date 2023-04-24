@@ -2,8 +2,8 @@
 // Created by Anthon Hertz Bie on 23/04/2023.
 //
 
-#ifndef YUKOON33_CMDS_H
-#define YUKOON33_CMDS_H
+#ifndef YUKOON33_INITCMDS_H
+#define YUKOON33_INITCMDS_H
 
 #include <stdio.h>
 #include "structs.h"
@@ -12,6 +12,7 @@ int evaluateCmd(char*, deck*, messages*);
 void cmdLD(char*, deck*,  messages*);
 void cmdSW(deck*);
 void cmdSI(deck*, int);
-int cmdQQ();
 void cmdSR(deck*);
-#endif //YUKOON33_CMDS_H
+void cmdSD(deck*, char*);
+int cmdQQ();
+#endif //YUKOON33_INITCMDS_H
