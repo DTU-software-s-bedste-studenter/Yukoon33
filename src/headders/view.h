@@ -12,7 +12,6 @@
 void printInitialView();
 void printCurrentView(deck*, messages*);
 void deckInit(deck);
-void shuffle(deck);
 void takeInput(char*);
 
 #endif //YUKOON33_VIEW_H

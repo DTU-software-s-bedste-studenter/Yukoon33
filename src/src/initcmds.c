@@ -61,11 +61,13 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
 
         display->lastCmd = "SI";
         display->message = "OK";
+        return 1;
     }
     if(command[0] == 'S' && command[1] == 'R'){
         cmdSR(deck);
         display->lastCmd = "SR";
         display->message = "OK";
+        return 1;
     }
     if(command[0] == 'S' && command[1] == 'D'){
         char filetxt[20];
@@ -79,6 +81,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         cmdSD(deck, filetxt);
         display->lastCmd = "SD";
         display->message = "OK";
+        return 1;
     }
 
     if (command[0] == 'Q' && command[1] == 'Q') {
@@ -178,7 +181,7 @@ void cmdSR(deck* input){
 void cmdSD(deck* currentdeck, char* filename){
     FILE* file;
     if (filename[0] == '\0'){
-        file = fopen("savedDeck", "w");
+        file = fopen("cards.txt", "w");
     } else {
         file = fopen(filename, "w");
     }

@@ -10,7 +10,7 @@ int main(void) {
     deck *deckptr = &firstDeck;
     messages gameMessages;
     messages *messagesptr = &gameMessages;
-    //deckInit(firstDeck);
+    deckInit(firstDeck);
 
     char command[MAX_INPUT];
     while(1) {

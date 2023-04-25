@@ -5,4 +5,6 @@
 #ifndef YUKOON33_GAMECMDS_H
 #define YUKOON33_GAMECMDS_H
 
+int cmdQ();
+
 #endif //YUKOON33_GAMECMDS_H
