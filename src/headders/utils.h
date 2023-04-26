@@ -5,6 +5,9 @@
 #ifndef YUKOON33_UTILS_H
 #define YUKOON33_UTILS_H
 #include <stdlib.h>
+#include "structs.h"
+#include "linkedlists.h"
 int randomNum();
+void initializeGame(deck*, gameBoard*);
 
 #endif //YUKOON33_UTILS_H

@@ -13,6 +13,8 @@ void addNode(card, list*);
 
 card* findNode(card, list*);
 
+card* getByIndex(int index, list* list);
+
 void moveCard(card* fromCard, list* toCard);
 
 #endif //YUKOON33_LINKEDLISTS_H

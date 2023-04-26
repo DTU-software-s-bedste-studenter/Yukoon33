@@ -45,6 +45,19 @@ card* findNode(card card, list* list){
     return 0;
 }
 
+card* getByIndex(int index, list* list){
+    node* currentNode;
+    currentNode = list->head;
+    int i = 0;
+    while(i < list->size){
+        if(i == index){
+            return &currentNode->data;
+        }
+        currentNode = currentNode->next;
+    }
+    return 0;
+}
+
 void moveCard(card* fromCard, list* toCard){
 
 }

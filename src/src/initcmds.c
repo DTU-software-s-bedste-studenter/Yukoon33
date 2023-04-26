@@ -88,6 +88,11 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
         display->message = "OK - BYE";
         return cmdQQ();
     }
+
+    if(command[0] == 'P'){
+        gameBoard *newGame;
+        cmdP(deck, newGame);
+    }
 }
 
 void cmdLD(char* filetxt, deck* deck, messages* display){
@@ -195,5 +200,12 @@ void cmdSD(deck* currentdeck, char* filename){
 
 int cmdQQ(){
     return 0;
+}
+
+int cmdP(deck* currentDeck, gameBoard* board){
+    for(int i = 0; i<11; i++){
+        board->board[i].size = 0;
+    }
+    initializeGame(currentDeck, board);
 }
 

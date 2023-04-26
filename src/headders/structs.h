@@ -26,18 +26,6 @@ typedef struct messages{
     char* message;
 } messages;
 
-typedef enum phase{
-    I = 'I', //Inital phase
-    G = 'G'  //Game phase
-} phase;
-
-typedef struct gameState{
-    phase currentPhase;
-    deck currentDeck;
-    char* message;
-    char* lastCommand;
-} gameState;
-
 typedef struct node{
     struct node* next;
     struct node* prev;
@@ -49,5 +37,23 @@ typedef struct list{
     node* tail;
     int size;
 }list;
+
+typedef enum phase{
+    I = 'I', //Inital phase
+    G = 'G'  //Game phase
+} phase;
+
+typedef struct gameBoard{
+    list board[11];
+} gameBoard;
+
+typedef struct gameState{
+    phase currentPhase;
+    deck currentDeck;
+    char* message;
+    char* lastCommand;
+} gameState;
+
+
 
 #endif //YUKOON33_STRUCTS_H
