@@ -38,4 +38,16 @@ typedef struct gameState{
     char* lastCommand;
 } gameState;
 
+typedef struct node{
+    struct node* next;
+    struct node* prev;
+    card data;
+} node;
+
+typedef struct list{
+    node* head;
+    node* tail;
+    int size;
+}list;
+
 #endif //YUKOON33_STRUCTS_H
