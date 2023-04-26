@@ -54,10 +54,11 @@ card* getByIndex(int index, list* list){
             return &currentNode->data;
         }
         currentNode = currentNode->next;
+        i++;
     }
     return 0;
 }
 
 void moveCard(card* fromCard, list* toCard){
-
+    //TODO make this command
 }

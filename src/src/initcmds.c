@@ -10,7 +10,7 @@
  * @param display pointer for the messages that will be shown.
  * @return
  */
-int evaluateCmd(char* command, deck* deck, messages* display) {
+int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame, phase* currentPhase) {
     if (command[0] == 'L' && command[1] == 'D') {
         char filetxt[20];
         for (int i = 0; i < 20; i++) {
@@ -90,8 +90,7 @@ int evaluateCmd(char* command, deck* deck, messages* display) {
     }
 
     if(command[0] == 'P'){
-        gameBoard *newGame;
-        cmdP(deck, newGame);
+        cmdP(deck, newGame, currentPhase);
     }
 }
 
@@ -202,7 +201,8 @@ int cmdQQ(){
     return 0;
 }
 
-int cmdP(deck* currentDeck, gameBoard* board){
+int cmdP(deck* currentDeck, gameBoard* board, phase* currentPhase){
+    *currentPhase = G;
     for(int i = 0; i<11; i++){
         board->board[i].size = 0;
     }

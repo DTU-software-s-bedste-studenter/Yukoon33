@@ -8,12 +8,12 @@
 #include <stdio.h>
 #include "structs.h"
 #include "utils.h"
-int evaluateCmd(char*, deck*, messages*);
+int evaluateCmd(char*, deck*, messages*, gameBoard*, phase*);
 void cmdLD(char*, deck*,  messages*);
 void cmdSW(deck*);
 void cmdSI(deck*, int);
 void cmdSR(deck*);
 void cmdSD(deck*, char*);
 int cmdQQ();
-int cmdP(deck*, gameBoard*);
+int cmdP(deck*, gameBoard*,  phase*);
 #endif //YUKOON33_INITCMDS_H

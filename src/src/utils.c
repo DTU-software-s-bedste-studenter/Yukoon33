@@ -21,13 +21,16 @@ void initializeGame(deck* currentDeck, gameBoard* board){
             }
             addNode(currentDeck->deck[i], &board->board[i % 7]);
         }else if(i < 37){
-            if((1 + (i % 6)) < k){
+            if((1 + (i % 6)) <= k){
                 currentDeck->deck[i].visible = 1;
             } else{
                 currentDeck->deck[i].visible = 0;
             }
             addNode(currentDeck->deck[i], &board->board[1 + (i % 6)]);
-            k++;
+            if(i % 6 == 0){
+                k++;
+            }
+
         } else{
             currentDeck->deck[i].visible = 1;
             addNode(currentDeck->deck[i], &board->board[j + (i % p)]);
@@ -38,4 +41,8 @@ void initializeGame(deck* currentDeck, gameBoard* board){
         }
 
     }
+}
+
+int wrongPhaseErr(messages* display){
+    display->lastCmd = "wrong phase";
 }

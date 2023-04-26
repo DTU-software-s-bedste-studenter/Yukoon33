@@ -50,6 +50,54 @@ void printCurrentView(deck* deck1, messages* display){
     printf("\nINPUT > ");
 }
 
+void printCurrentGame(gameBoard* currentGame, messages* display){
+    for(int i = 1; i < 8; i++){
+        printf("C%d\t", i);
+    }
+    printf("\n\n");
+    int row = 0;
+    int column = 0;
+    int finishedColoums[7] = {0,0,0,0,0,0,0};
+    while(1){
+        card* thisCard = getByIndex(row, &currentGame->board[column % 7]);
+        if(thisCard != 0) {
+            if (thisCard->visible) {
+                printf("%c%c\t", thisCard->number, thisCard->suit);
+            } else {
+                printf("[]\t");
+            }
+
+        } else{
+            printf("\t");
+            finishedColoums[column % 7] = 1;
+        }
+        column++;
+        int sum = 0;
+        if(column % 7 == 0){
+            if(row % 2 == 0 && row < 8) {
+                printf("[] : F%d\n", 1 + row/2);
+            } else{
+                printf("\n");
+                for(int i = 0; i<7; i++){
+                    sum += finishedColoums[i];
+                }
+            }
+            row++;
+        }
+
+
+
+        if(sum == 7){
+            break;
+        }
+    }
+    printf("LAST Command: ");
+    printf("%s", display->lastCmd);
+    printf("\nMessage: ");
+    printf("%s", display->message);
+    printf("\nINPUT > ");
+}
+
 void deckInit(deck firstDeck) {
     int cardCount = 0;
     suit localSuit = C;
