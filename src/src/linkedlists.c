@@ -73,15 +73,29 @@ card* getByIndex(int index, list* list){
     return 0;
 }
 
+/**
+ * first we check if the card is in the pile, if not: error. if it is
+ * then we check if the to-pile to is empty, if it is
+ * then we check if the to-card pile is an F pile, if it is
+ * then we check if the card(s) is an A, if it is
+ * then we check if it is only one card is to be moved, if not: error. if it is
+ * then we move the card.
+ *
+ * If it wasn't empty, then we check if the cards are valid to be put on top of eachother.
+ *
+ * @param fromCard
+ * @param fromCardPile
+ * @param toCard
+ */
 void moveCard(card* fromCard, list* fromCardPile, list* toCard){
     char numbers[14] = {'A','2','3','4','5','6','7','8','9' ,'T','J','Q','K', 'NULL'};
+    card* tempFromCard = fromCard;
     if(!findCard(*fromCard, fromCardPile)){
         return; //error message
     } // &??
-    card* tempFromCard = fromCard;
     if(toCard->size == 0){
         if(fromCard->number == 'A' && toCard->name[0] == 'F') {
-            if(fromCardPile->tail->prev->data != fromCard){
+            if(fromCardPile->tail->prev->data.number != fromCard->number && fromCardPile->tail->prev->data.suit != fromCard->suit){
                 return; // error message
             }
             addNode(*fromCard, toCard);
@@ -110,10 +124,25 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard){
             secondNumber = i;
         }
     }
-    if(numbers[firstNumber+1] != numbers[secondNumber]){
-        return; //print error statement
+    if(toCard->name[0] == 'F') {
+        if (numbers[firstNumber] != numbers[secondNumber + 1]) {
+            return; //print error statement
+        } else {
+            while (tempFromCard->number != '#') {
+                addNode(*tempFromCard, toCard);
+                *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+            }
+        }
     }
-
-
+    else if(toCard->name[0] == 'C'){
+        if(numbers[firstNumber+1] != numbers[secondNumber]){
+            return; //print error statement
+        } else {
+            while (tempFromCard->number != '#') {
+                addNode(*tempFromCard, toCard);
+                *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+            }
+        }
+    }
 
 }
