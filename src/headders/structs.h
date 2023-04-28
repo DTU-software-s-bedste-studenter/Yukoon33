@@ -21,6 +21,7 @@ typedef struct deck{
     card deck[52];
 } deck;
 
+
 typedef struct messages{
     char* lastCmd;
     char* message;
@@ -33,6 +34,7 @@ typedef struct node{
 } node;
 
 typedef struct list{
+    char name[2];
     node* head;
     node* tail;
     int size;

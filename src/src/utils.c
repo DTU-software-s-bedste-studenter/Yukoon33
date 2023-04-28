@@ -14,6 +14,9 @@ void initializeGame(deck* currentDeck, gameBoard* board){
     int p = 5;
     for(int i = 0; i<52; i++){
         if(i < 7) {
+            char temp = i + 1;
+            char temp2[2] = {'C', temp};
+            initList(&board->board[i], temp2);
             if(i == 0){
                 currentDeck->deck[i].visible = 1;
             } else{
@@ -38,6 +41,11 @@ void initializeGame(deck* currentDeck, gameBoard* board){
                 j++;
                 p--;
             }
+        }
+        for (int l = 7; l < 11 ; ++l) {
+            char temp = i - 6;
+            char temp2[2] = {'F', temp};
+            initList(&board->board[i], temp2);
         }
 
     }

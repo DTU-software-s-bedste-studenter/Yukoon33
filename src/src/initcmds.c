@@ -92,6 +92,10 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
     if(command[0] == 'P'){
         cmdP(deck, newGame, currentPhase);
     }
+
+    /*if(command[0] == '' && command[1] == ''){
+
+    }*/
 }
 
 void cmdLD(char* filetxt, deck* deck, messages* display){

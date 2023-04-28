@@ -7,14 +7,16 @@
 #include "structs.h"
 #define DUMMY_VALUE {H, '#'};
 
-void initList(list*);
+void initList(list*, char*);
 
 void addNode(card, list*);
 
-card* findNode(card, list*);
+card* findCard(card card, list *list);
+
+node* findNode(card card, list* list);
 
 card* getByIndex(int index, list* list);
 
-void moveCard(card* fromCard, list* toCard);
+void moveCard(card* fromCard, list* fromCardPile, list* toCard);
 
 #endif //YUKOON33_LINKEDLISTS_H
