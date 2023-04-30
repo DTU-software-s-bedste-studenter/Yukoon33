@@ -87,44 +87,50 @@ card* getByIndex(int index, list* list){
  * @param fromCardPile
  * @param toCard
  */
-void moveCard(card* fromCard, list* fromCardPile, list* toCard){
-    char numbers[14] = {'A','2','3','4','5','6','7','8','9' ,'T','J','Q','K', 'NULL'};
-    card* tempFromCard = fromCard;
-    if(!findCard(*fromCard, fromCardPile)){
+void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
+    char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
+    card *tempFromCard = fromCard;
+    node *prevCard = findNode(*fromCard, fromCardPile)->prev;
+    if (!findCard(*fromCard, fromCardPile)) {
         return; //error message
-    } // &??
-    if(toCard->size == 0){
-        if(fromCard->number == 'A' && toCard->name[0] == 'F') {
-            if(fromCardPile->tail->prev->data.number != fromCard->number && fromCardPile->tail->prev->data.suit != fromCard->suit){
+    }
+    if (toCard->size == 0) {
+        if (fromCard->number == 'A' && toCard->name[0] == 'F') {
+            if (fromCardPile->tail->prev->data.number != fromCard->number &&
+                fromCardPile->tail->prev->data.suit != fromCard->suit) {
                 return; // error message
             }
             addNode(*fromCard, toCard);
-        } else if(toCard->name[0] == 'F'){
+            prevCard->next = fromCardPile->tail;
+            fromCardPile->tail->prev = prevCard;
+        } else if (toCard->name[0] == 'F') {
             return; //error message
-        }
-        else{
-            while(tempFromCard->number != '#')
-            addNode(*tempFromCard, toCard);
-            *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+        } else {
+            while (tempFromCard->number != '#') {
+                addNode(*tempFromCard, toCard);
+                *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+            }
+            prevCard->next = fromCardPile->tail;
+            fromCardPile->tail->prev = prevCard;
         }
     }
-    if(fromCard->suit != toCard->tail->prev->data.suit && toCard->name[0] == 'F'){
+    if (fromCard->suit != toCard->tail->prev->data.suit && toCard->name[0] == 'F') {
         return; //print error statement
     }
-    if(fromCard->suit == toCard->tail->prev->data.suit && toCard->name[0] == 'C'){
+    if (fromCard->suit == toCard->tail->prev->data.suit && toCard->name[0] == 'C') {
         return; //print error statement
     }
     int firstNumber = (int) NULL;
     int secondNumber = (int) NULL;
     for (int i = 0; i < numbers; ++i) {
-        if(numbers[i] == fromCard->number){
+        if (numbers[i] == fromCard->number) {
             firstNumber = i;
         }
-        if(numbers[i] == toCard->tail->prev->data.number){
+        if (numbers[i] == toCard->tail->prev->data.number) {
             secondNumber = i;
         }
     }
-    if(toCard->name[0] == 'F') {
+    if (toCard->name[0] == 'F') {
         if (numbers[firstNumber] != numbers[secondNumber + 1]) {
             return; //print error statement
         } else {
@@ -132,17 +138,21 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard){
                 addNode(*tempFromCard, toCard);
                 *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
             }
+            prevCard->next = fromCardPile->tail;
+            fromCardPile->tail->prev = prevCard;
         }
-    }
-    else if(toCard->name[0] == 'C'){
-        if(numbers[firstNumber+1] != numbers[secondNumber]){
+    } else if (toCard->name[0] == 'C') {
+        if (numbers[firstNumber + 1] != numbers[secondNumber]) {
             return; //print error statement
         } else {
+            prevCard->next = fromCardPile->tail;
+            fromCardPile->tail->prev = prevCard;
             while (tempFromCard->number != '#') {
                 addNode(*tempFromCard, toCard);
                 *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
             }
+            prevCard->next = fromCardPile->tail;
+            fromCardPile->tail->prev = prevCard;
         }
     }
-
 }
