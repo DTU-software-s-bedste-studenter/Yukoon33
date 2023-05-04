@@ -14,7 +14,7 @@ void initializeGame(deck* currentDeck, gameBoard* board){
     int p = 5;
     for(int i = 0; i<52; i++) {
         if (i < 7) {
-            char temp = i + 1;
+            char temp = i + 1 + '0';
             char temp2[2] = {'C', temp};
             initList(&board->board[i], temp2);
             if (i == 0) {
