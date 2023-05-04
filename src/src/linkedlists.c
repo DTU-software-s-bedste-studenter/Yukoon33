@@ -73,11 +73,17 @@ card* getByIndex(int index, list* list){
     return 0;
 }
 
-card getCardByName(char suit, char number){
-    card card1;
-    card1.suit = suit;
-    card1.number = number;
-    return card1;
+card* getCardByName(char suit, char number, list* fromlist){
+    card* tempcard;
+    node* tempnode = fromlist->head;
+    while(tempcard->number != '#'){
+        tempcard = &tempnode->data;
+        tempnode = tempnode->next;
+        if(tempcard->suit == suit && tempcard->number ==  number && tempcard->visible == 1){
+            return tempcard;
+        }
+    }
+    return 0;
 }
 
 list* getListByName(char column, char number, gameBoard* gameBoard1){
@@ -110,9 +116,6 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
     char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
     card *tempFromCard = fromCard;
     node *prevCard = findNode(*fromCard, fromCardPile)->prev;
-    if (!findCard(*fromCard, fromCardPile)) {
-        return; //error message
-    }
     if (toCard->size == 0) {
         if (fromCard->number == 'A' && toCard->name[0] == 'F') {
             if (fromCardPile->tail->prev->data.number != fromCard->number &&

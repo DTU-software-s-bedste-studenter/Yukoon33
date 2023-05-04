@@ -26,7 +26,14 @@ int main(void) {
         }
         if(*currentPhase == G){
             if(evalMoveInput(command)){
-                moveCard(getCardByName(command[2], command[3]), getListByName(command[0], command[1], thisGame), getListByName(command[7], command[8], thisGame));
+                list* fromlist = getListByName(command[0], command[1], thisGame);
+                list* toList = getListByName(command[7], command[8], thisGame);
+                card* fromCard = getCardByName(command[4], command[3],fromlist);
+                if(fromCard != 0) {
+                    moveCard(fromCard, fromlist, toList);
+                } else{
+                    //error
+                }
             } else{
 
             }
