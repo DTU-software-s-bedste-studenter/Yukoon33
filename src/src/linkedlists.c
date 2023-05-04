@@ -73,6 +73,21 @@ card* getByIndex(int index, list* list){
     return 0;
 }
 
+card getCardByName(char suit, char number){
+    card card1;
+    card1.suit = suit;
+    card1.number = number;
+    return card1;
+}
+
+list* getListByName(char column, char number, gameBoard* gameBoard1){
+    for(int i = 0; i < gameBoard1->board->size; ++i){
+        if(gameBoard1->board[i].name[1] == column && gameBoard1->board[i].name[2] == number){
+            return &gameBoard1->board[i];
+        }
+    }
+}
+
 /**
  * first we check if the card is in the pile, if not: error. if it is
  * then we check if the to-pile to is empty, if it is
@@ -83,10 +98,14 @@ card* getByIndex(int index, list* list){
  *
  * If it wasn't empty, then we check if the cards are valid to be put on top of eachother.
  *
+ * Missing error statements, and haven't been implemented yet
+ *
  * @param fromCard
  * @param fromCardPile
  * @param toCard
  */
+// C1H2:C8
+// C6:H2->C4
 void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
     char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
     card *tempFromCard = fromCard;
@@ -103,6 +122,7 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
             addNode(*fromCard, toCard);
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            return;
         } else if (toCard->name[0] == 'F') {
             return; //error message
         } else {
@@ -112,6 +132,7 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            return;
         }
     }
     if (fromCard->suit != toCard->tail->prev->data.suit && toCard->name[0] == 'F') {
@@ -140,6 +161,7 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            return;
         }
     } else if (toCard->name[0] == 'C') {
         if (numbers[firstNumber + 1] != numbers[secondNumber]) {
@@ -153,6 +175,8 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            return;
         }
     }
+    return; //print error statement
 }

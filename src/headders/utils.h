@@ -9,6 +9,7 @@
 #include "linkedlists.h"
 int randomNum();
 void initializeGame(deck*, gameBoard*);
+int evalMoveInput(char*);
 int wrongPhaseErr(messages*);
 
 #endif //YUKOON33_UTILS_H

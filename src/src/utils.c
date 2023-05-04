@@ -43,12 +43,49 @@ void initializeGame(deck* currentDeck, gameBoard* board){
             }
         }
         for (int l = 7; l < 11 ; ++l) {
-            char temp = i - 6;
+            char temp = l - 6;
             char temp2[2] = {'F', temp};
             initList(&board->board[i], temp2);
         }
 
     }
+}
+
+int evalMoveInput(char* moveCommand){
+    if(moveCommand[0] == 'C'){
+        if(moveCommand[1] < 49 && moveCommand > 55){
+            return 0; //error
+        }
+    } else if( moveCommand[0] == 'F'){
+        if(moveCommand[1] < 49 && moveCommand[1] > 52){
+            return 0;
+        }
+    }
+    if(moveCommand[2] != ':'){
+        return 0; //error
+    }
+    if( !(moveCommand[3] == 'H' || moveCommand[3] == 'S' || moveCommand[3] == 'D' || moveCommand[3] == 'C') ){
+        return 0; // error
+    }
+    if(!(moveCommand[4] > 48 && moveCommand[4] < 58 || moveCommand[4] == 'T'|| moveCommand[4] == 'J'|| moveCommand[4] == 'Q'|| moveCommand[4] == 'K')){
+        return 0; //error
+    }
+    if(moveCommand[5] != '-'){
+        return 0; //error
+    }
+    if(moveCommand[6] != '>'){
+        return 0; //error
+    }
+    if(moveCommand[7] == 'C'){
+        if(moveCommand[8] < 49 && moveCommand > 55){
+            return 0; //error
+        }
+    } else if( moveCommand[7] == 'F'){
+        if(moveCommand[8] < 49 && moveCommand[1] > 52){
+            return 0; // error
+        }
+    }
+    return 1;
 }
 
 int wrongPhaseErr(messages* display){

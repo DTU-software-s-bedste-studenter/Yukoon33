@@ -17,6 +17,10 @@ node* findNode(card card, list* list);
 
 card* getByIndex(int index, list* list);
 
+card getCardByName(char suit, char number);
+
+list* getListByName(char, char, gameBoard*);
+
 void moveCard(card* fromCard, list* fromCardPile, list* toCard);
 
 #endif //YUKOON33_LINKEDLISTS_H

@@ -25,6 +25,11 @@ int main(void) {
             printCurrentView(deckptr, messagesptr);
         }
         if(*currentPhase == G){
+            if(evalMoveInput(command)){
+                moveCard(getCardByName(command[2], command[3]), getListByName(command[0], command[1], thisGame), getListByName(command[7], command[8], thisGame));
+            } else{
+
+            }
             printCurrentGame(thisGame, messagesptr);
         }
     }
