@@ -52,6 +52,7 @@ node* findNode(card card, list* list){
     currentNode = list->head;
     while(currentNode->data.number != '#'){
         if(currentNode->data.number == card.number && currentNode->data.suit == card.suit && currentNode->data.visible == 1){
+            list->head = list->tail->next;
             return currentNode;
         }
         currentNode = currentNode->next;
@@ -73,15 +74,15 @@ card* getByIndex(int index, list* list){
     return 0;
 }
 
-card* getCardByName(char suit, char number, list* fromlist){
+node* getCardByName(char suit, char number, list* fromlist){
     node* tempnode = fromlist->head;
     card* tempcard = &tempnode->data;
     while(tempcard->number != '#'){
         tempcard = &tempnode->data;
-        tempnode = tempnode->next;
         if(tempcard->suit == suit && tempcard->number ==  number && tempcard->visible == 1){
-            return tempcard;
+            return tempnode;
         }
+        tempnode = tempnode->next;
     }
     return 0;
 }
@@ -112,45 +113,49 @@ list* getListByName(char column, char number, gameBoard* gameBoard1){
  */
 // C1H2:C8
 // C6:H2->C4
-void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
+void moveCard(node* fromCard, list* fromCardPile, list* toCard) {
     char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
     size_t numbersSize = sizeof(numbers)/sizeof(numbers[0]);
-    card* tempFromCard = fromCard;
-    node* prevCard = findNode(*fromCard, fromCardPile)->prev;
+    node* tempFromCard = fromCard;
+    if(tempFromCard->data.visible == 0){
+        return; //error
+    }
+    node* prevCard = findNode(fromCard->data, fromCardPile)->prev;
     if (toCard->size == 0) {
-        if (fromCard->number == 'A' && toCard->name[0] == 'F') {
-            if (fromCardPile->tail->prev->data.number != fromCard->number &&
-                fromCardPile->tail->prev->data.suit != fromCard->suit) {
+        if (fromCard->data.number == 'A' && toCard->name[0] == 'F') {
+            if (fromCardPile->tail->prev->data.number != fromCard->data.number ||
+                fromCardPile->tail->prev->data.suit != fromCard->data.suit) {
                 return; // error message
             }
-            addNode(*fromCard, toCard);
-            fromCardPile->size = fromCardPile->size-1;
+            addNode(fromCard->data, toCard);
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            fromCardPile->size = fromCardPile->size-1;
             return;
         } else if (toCard->name[0] == 'F') {
             return; //error message
         } else {
-            while (tempFromCard->number != '#') {
-                addNode(*tempFromCard, toCard);
+            while (tempFromCard->data.number != '#') {
+                addNode(tempFromCard->data, toCard);
                 fromCardPile->size = fromCardPile->size-1;
-                *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+                tempFromCard = tempFromCard->next;
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            prevCard->data.visible = 1;
             return;
         }
     }
-    if (fromCard->suit != toCard->tail->prev->data.suit && toCard->name[0] == 'F') {
+    if (fromCard->data.suit != toCard->tail->prev->data.suit && toCard->name[0] == 'F') {
         return; //print error statement
     }
-    if (fromCard->suit == toCard->tail->prev->data.suit && toCard->name[0] == 'C') {
+    if (fromCard->data.suit == toCard->tail->prev->data.suit && toCard->name[0] == 'C') {
         return; //print error statement
     }
     int firstNumber = (int) NULL;
     int secondNumber = (int) NULL;
     for (int i = 0; i < numbersSize; ++i) {
-        if (numbers[i] == fromCard->number) {
+        if (numbers[i] == fromCard->data.number) {
             firstNumber = i;
         }
         if (numbers[i] == toCard->tail->prev->data.number) {
@@ -161,28 +166,29 @@ void moveCard(card* fromCard, list* fromCardPile, list* toCard) {
         if (numbers[firstNumber] != numbers[secondNumber + 1]) {
             return; //print error statement
         } else {
-            while (tempFromCard->number != '#') {
-                addNode(*tempFromCard, toCard);
+            while (tempFromCard->data.number != '#') {
+                addNode(tempFromCard->data, toCard);
                 fromCardPile->size = fromCardPile->size-1;
-                *tempFromCard = findNode(*tempFromCard, fromCardPile)->next->data;
+                tempFromCard = tempFromCard->next;
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            prevCard->data.visible = 1;
+            toCard->tail->prev->prev->data.visible = 0;
             return;
         }
     } else if (toCard->name[0] == 'C') {
         if (numbers[firstNumber + 1] != numbers[secondNumber]) {
             return; //print error statement
         } else {
-            prevCard->next = fromCardPile->tail;
-            fromCardPile->tail->prev = prevCard;
-            while (tempFromCard->number != '#') {
-                addNode(*tempFromCard, toCard);
+            while (tempFromCard->data.number != '#') {
+                addNode(tempFromCard->data, toCard);
                 fromCardPile->size = fromCardPile->size-1;
-                tempFromCard = &findNode(*tempFromCard, fromCardPile)->next->data; //error happens here
+                tempFromCard = tempFromCard->next;
             }
             prevCard->next = fromCardPile->tail;
             fromCardPile->tail->prev = prevCard;
+            prevCard->data.visible = 1;
             return;
         }
     }

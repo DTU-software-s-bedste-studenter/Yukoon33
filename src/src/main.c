@@ -28,7 +28,7 @@ int main(void) {
             if(evalMoveInput(command)){
                 list* fromlist = getListByName(command[0], command[1], thisGame);
                 list* toList = getListByName(command[7], command[8], thisGame);
-                card* fromCard = getCardByName(command[4], command[3],fromlist);
+                node* fromCard = getCardByName(command[4], command[3],fromlist);
                 if(fromCard != 0) {
                     moveCard(fromCard, fromlist, toList);
                 } else{
@@ -38,6 +38,9 @@ int main(void) {
 
             }
             printCurrentGame(thisGame, messagesptr);
+            if(winnerFound(thisGame)){
+                break; // should be cmdQ and a winner message
+            }
         }
     }
     printf("%s", gameMessages.message);

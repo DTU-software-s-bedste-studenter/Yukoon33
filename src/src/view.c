@@ -57,6 +57,7 @@ void printCurrentGame(gameBoard* currentGame, messages* display){
     printf("\n\n");
     int row = 0;
     int column = 0;
+    int fTiles = 7;
     int finishedColoums[7] = {0,0,0,0,0,0,0};
     while(1){
         card* thisCard = getByIndex(row, &currentGame->board[column % 7]);
@@ -75,7 +76,13 @@ void printCurrentGame(gameBoard* currentGame, messages* display){
         int sum = 0;
         if(column % 7 == 0){
             if(row % 2 == 0 && row < 8) {
-                printf("[] : F%d\n", 1 + row/2);
+                if(currentGame->board[fTiles].size == 0) {
+                    printf("[] : F%d\n", 1 + row / 2);
+                }else{
+                    card* otherCard = &currentGame->board[fTiles].tail->prev->data;
+                    printf( "%c%c : F%d\n", otherCard->number, otherCard->suit, 1 + row / 2);
+                }
+                fTiles++;
             } else{
                 printf("\n");
                 for(int i = 0; i<7; i++){
