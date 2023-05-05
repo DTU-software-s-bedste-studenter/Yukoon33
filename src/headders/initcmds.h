@@ -16,4 +16,5 @@ void cmdSR(deck*);
 void cmdSD(deck*, char*);
 int cmdQQ();
 int cmdP(deck*, gameBoard*,  phase*);
+int cmdQ(phase*);
 #endif //YUKOON33_INITCMDS_H

@@ -39,7 +39,8 @@ int main(void) {
             }
             printCurrentGame(thisGame, messagesptr);
             if(winnerFound(thisGame)){
-                break; // should be cmdQ and a winner message
+                //winner message here
+                cmdQ(currentPhase);
             }
         }
     }

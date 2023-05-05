@@ -205,6 +205,10 @@ int cmdQQ(){
     return 0;
 }
 
+int cmdQ(phase* currentPhase){
+    *currentPhase = I;
+}
+
 int cmdP(deck* currentDeck, gameBoard* board, phase* currentPhase){
     *currentPhase = G;
     for(int i = 0; i<11; i++){
