@@ -53,7 +53,7 @@ void initializeGame(deck* currentDeck, gameBoard* board){
 
 int evalMoveInput(char* moveCommand){
     if(moveCommand[0] == 'C'){
-        if(moveCommand[1] < 49 && moveCommand > 55){
+        if(moveCommand[1] < 49 && moveCommand[1] > 55){
             return 0; //error
         }
     } else if( moveCommand[0] == 'F'){
@@ -64,10 +64,10 @@ int evalMoveInput(char* moveCommand){
     if(moveCommand[2] != ':'){
         return 0; //error
     }
-    if( !(moveCommand[4] == 'H' || moveCommand[4] == 'S' || moveCommand[4] == 'D' || moveCommand[4] == 'C') ){
+    if( !(moveCommand[4] == 'H' || moveCommand[4] == 'S' || moveCommand[4] == 'D' || moveCommand[4] == 'C'||moveCommand[4] >= 49 && moveCommand[4] <= 55) ){
         return 0; // error
     }
-    if(!(moveCommand[3] > 48 && moveCommand[3] < 58 ||moveCommand[3] == 'A' || moveCommand[3] == 'T'|| moveCommand[3] == 'J'|| moveCommand[3] == 'Q'|| moveCommand[3] == 'K')){
+    if(!(moveCommand[3] > 48 && moveCommand[3] < 58 ||moveCommand[3] == 'A' || moveCommand[3] == 'T'|| moveCommand[3] == 'J'|| moveCommand[3] == 'Q'|| moveCommand[3] == 'K' || moveCommand[3] == 'C'|| moveCommand[3] == 'F')){
         return 0; //error
     }
     if(moveCommand[5] != '-'){
