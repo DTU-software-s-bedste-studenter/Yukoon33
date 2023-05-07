@@ -27,7 +27,7 @@ int main(void) {
         if(*currentPhase == G){
             if(evalMoveInput(command)){
                 list* fromlist = getListByName(command[0], command[1], thisGame);
-                list* toList = getListByName(command[7], command[8], thisGame);
+                list* toList = getListByName(command[7], command[8], thisGame); // if else for toList, else should be command[3], command[4], thisGame
                 node* fromCard = getCardByName(command[4], command[3],fromlist);
                 if(fromCard != 0) {
                     moveCard(fromCard, fromlist, toList);
