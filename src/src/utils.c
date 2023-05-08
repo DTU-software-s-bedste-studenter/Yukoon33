@@ -50,49 +50,63 @@ void initializeGame(deck* currentDeck, gameBoard* board){
         }
 
     }
-
+/**
+ *
+ * @param moveCommand
+ * @param display
+ * @return IF function returns false then invalid move
+ */
 int evalMoveInput(char* moveCommand){
     if(moveCommand[0] == 'C'){
-        if(moveCommand[1] < 49 && moveCommand[1] > 55){
-            return 0; //error
+        if(!(moveCommand[1] > 48 && moveCommand[1] < 56)){
+            return 0;
         }
     } else if( moveCommand[0] == 'F'){
-        if(moveCommand[1] < 49 && moveCommand[1] > 52){
+        if(!(moveCommand[1] > 48 && moveCommand[1] < 53)){
             return 0;
         }
     }
-    if(moveCommand[2] != ':'){
-        return 0; //error
-    }
-    if( !(moveCommand[4] == 'H' || moveCommand[4] == 'S' || moveCommand[4] == 'D' || moveCommand[4] == 'C'||moveCommand[4] >= 49 && moveCommand[4] <= 55) ){
-        return 0; // error
-    }
-    if(!(moveCommand[3] > 48 && moveCommand[3] < 58 ||moveCommand[3] == 'A' || moveCommand[3] == 'T'|| moveCommand[3] == 'J'|| moveCommand[3] == 'Q'|| moveCommand[3] == 'K' || moveCommand[3] == 'C'|| moveCommand[3] == 'F')){
-        return 0; //error
-    }
-    if(moveCommand[5] != '-'){
-        return 0; //error
-    }
-    if(moveCommand[6] != '>'){
-        return 0; //error
-    }
-    if(moveCommand[7] == 'C'){
-        if(moveCommand[8] < 49 && moveCommand > 55){
-            return 0; //error
+    if(moveCommand[2] == ':'){
+        if( !(moveCommand[4] == 'H' || moveCommand[4] == 'S' || moveCommand[4] == 'D' || moveCommand[4] == 'C'||moveCommand[4] >= 49 && moveCommand[4] <= 55) ){
+            return 0;
         }
-    } else if( moveCommand[7] == 'F'){
-        if(moveCommand[8] < 49 && moveCommand[1] > 52){
-            return 0; // error
+        if(!(moveCommand[3] > 48 && moveCommand[3] < 58 ||moveCommand[3] == 'A' || moveCommand[3] == 'T'|| moveCommand[3] == 'J'|| moveCommand[3] == 'Q'|| moveCommand[3] == 'K' || moveCommand[3] == 'C'|| moveCommand[3] == 'F')){
+            return 0;
         }
-    }
-    if(moveCommand[0] == moveCommand[7] && moveCommand[1] == moveCommand[8]){
-        return 0;
+        if(moveCommand[5] != '-'){
+            return 0;
+        }
+        if(moveCommand[6] != '>'){
+            return 0;
+        }
+        if(moveCommand[7] == 'C'){
+            if(!(moveCommand[8] > 48 && moveCommand[8] < 56)){
+                return 0;
+            }
+        } else if( moveCommand[7] == 'F'){
+            if(!(moveCommand[8] > 48 && moveCommand[1] < 53)){
+                return 0;
+            }
+        }
+        if(moveCommand[0] == moveCommand[7] && moveCommand[1] == moveCommand[8]){
+            return 0;
+        }
+    } else if(moveCommand[2] == '-' && moveCommand[3] == '>'){
+        if(moveCommand[4] == 'C'){
+            if(!(moveCommand[5] > 48 && moveCommand < 56)){
+                return 0;
+            }
+        } else if( moveCommand[4] == 'F'){
+            if(!(moveCommand[5] > 48 && moveCommand[5] < 53)){
+                return 0;
+            }
+        }
+    } else if(moveCommand[0] == 'P'){
+        return 2;
+    } else if(moveCommand[0] == '*'){
+        return 3;
     }
     return 1;
-}
-
-int wrongPhaseErr(messages* display){
-    display->lastCmd = "wrong phase";
 }
 
 int winnerFound(gameBoard* thisGame){

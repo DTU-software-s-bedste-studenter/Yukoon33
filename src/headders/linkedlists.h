@@ -21,6 +21,8 @@ node* getCardByName(char suit, char number, list* list);
 
 list* getListByName(char, char, gameBoard*);
 
-void moveCard(node* fromCard, list* fromCardPile, list* toCard);
+node* getLastCardFromList(list*);
+
+void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
 
 #endif //YUKOON33_LINKEDLISTS_H

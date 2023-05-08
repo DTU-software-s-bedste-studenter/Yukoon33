@@ -13,6 +13,7 @@
 void printInitialView();
 void printCurrentView(deck*, messages*);
 void printCurrentGame(gameBoard*, messages*);
+void printTitle();
 void deckInit(deck);
 void takeInput(char*);
 

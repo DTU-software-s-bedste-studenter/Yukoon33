@@ -4,6 +4,8 @@
 
 #include "../headders/view.h"
 void printInitialView(){
+    system("clear");
+    printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -14,12 +16,14 @@ void printInitialView(){
         }
         printf("[] : F%d\n\n", j);
     }
-    printf("LAST Command:");
+    printf("\nLAST Command:");
     printf("\nMessage:");
     printf("\nINPUT > ");
 }
 
 void printCurrentView(deck* deck1, messages* display){
+    system("clear");
+    printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -43,14 +47,16 @@ void printCurrentView(deck* deck1, messages* display){
             printf("\n");
         }
     }
-    printf("LAST Command: ");
+    printf("\nLAST Command: ");
     printf("%s", display->lastCmd);
-    printf("\nMessage: ");
+    printf("Message: ");
     printf("%s", display->message);
     printf("\nINPUT > ");
 }
 
 void printCurrentGame(gameBoard* currentGame, messages* display){
+    system("clear");
+    printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -98,11 +104,21 @@ void printCurrentGame(gameBoard* currentGame, messages* display){
             break;
         }
     }
-    printf("LAST Command: ");
+    printf("\nLAST Command: ");
     printf("%s", display->lastCmd);
-    printf("\nMessage: ");
+    printf("Message: ");
     printf("%s", display->message);
     printf("\nINPUT > ");
+}
+
+void printTitle(){
+    printf("---------------------------------------------------------------------\n");
+    printf("    \\\\   // ||  || ||  //  ⎡⎡‾‾⎤⎤ ⎡⎡‾‾⎤⎤ ||  ||    3333    3333 \n");
+    printf("     \\\\ //  ||  || || //   ||  || ||  || ||\\ ||       333     333\n");
+    printf("      \\//   ||  || ||||    ||  || ||  || ||\\\\||     333     333  \n");
+    printf("     ///    ||  || || \\\\   ||  || ||  || || \\||       333     333\n");
+    printf("    ///     ⎣⎣__⎦⎦ ||  \\\\  ⎣⎣__⎦⎦ ⎣⎣__⎦⎦ ||  ||    3333    3333 \n");
+    printf("---------------------------------------------------------------------\n");
 }
 
 void deckInit(deck firstDeck) {
