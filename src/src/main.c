@@ -55,8 +55,12 @@ int main(void) {
                 messagesptr->lastCmd = command;
                 messagesptr->message = "OK, game started";
             }else if(eval == 3){
-            messagesptr->lastCmd = "P";
+            messagesptr->lastCmd = "P\n";
             messagesptr->message = "Invalid move";
+            }
+            else{
+                messagesptr->lastCmd = command;
+                messagesptr->message = "Invalid move";
             }
             if(winnerFound(thisGame)){
                 messagesptr->lastCmd = command;

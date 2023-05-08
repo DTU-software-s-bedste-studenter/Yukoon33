@@ -52,7 +52,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
             }
             if (number > 52 || 0 > number || command[5] != '\n') {
                 display->lastCmd = command;
-                display->message = "Number too large, for split";
+                display->message = "Number too large OR too small, for split";
                 return 1;
             }
             cmdSI(deck, number);
@@ -122,7 +122,7 @@ void cmdLD(char* filetxt, deck* deck, messages* display){
             deck->deck[i].visible = card[2] - 48;
         }
     } else{
-        display->lastCmd = "LD";
+        display->lastCmd = "LD\n";
         display->message = "File doesn't exist";
     }
 }

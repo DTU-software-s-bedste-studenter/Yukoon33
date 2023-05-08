@@ -4,8 +4,10 @@
 
 #include "../headders/view.h"
 void printInitialView(){
-    system("clear");
-    printTitle();
+    for (int n = 0; n < 10; n++) {
+        printf("\n\n\n\n\n\n\n\n\n\n");
+    }
+    //printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -22,8 +24,10 @@ void printInitialView(){
 }
 
 void printCurrentView(deck* deck1, messages* display){
-    system("clear");
-    printTitle();
+    for (int n = 0; n < 10; n++) {
+        printf("\n\n\n\n\n\n\n\n\n\n");
+    }
+    //printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -55,8 +59,10 @@ void printCurrentView(deck* deck1, messages* display){
 }
 
 void printCurrentGame(gameBoard* currentGame, messages* display){
-    system("clear");
-    printTitle();
+    for (int n = 0; n < 10; n++) {
+        printf("\n\n\n\n\n\n\n\n\n\n");
+    }
+    //printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -100,7 +106,7 @@ void printCurrentGame(gameBoard* currentGame, messages* display){
 
 
 
-        if(sum == 7){
+        if(sum == 7 && row > 8){
             break;
         }
     }
