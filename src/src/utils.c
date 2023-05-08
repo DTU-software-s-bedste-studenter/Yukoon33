@@ -49,10 +49,16 @@ void initializeGame(deck* currentDeck, gameBoard* board){
 /**
  *
  * @param moveCommand
- * @param display
- * @return IF function returns false then invalid move
+ * @return IF function returns false/0 then invalid move,
+ * if it returns true/1, if it returns 2 or 3 separate messages occurs
  */
 int evalMoveInput(char* moveCommand){
+    if(moveCommand[0] == 'U' && moveCommand[1] == '\n'){
+        return 4;
+    }
+    if(moveCommand[0] == 'R' && moveCommand[1] == '\n'){
+        return 5;
+    }
     if(moveCommand[0] == 'C'){
         if(!(moveCommand[1] > 48 && moveCommand[1] < 56)){
             return 0;

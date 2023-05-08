@@ -33,6 +33,20 @@ typedef struct node{
     card data;
 } node;
 
+typedef struct cmdNode{
+    struct cmdNode* next;
+    struct cmdNode* prev;
+    char* cmd;
+    int pastVisible;
+} cmdNode;
+
+typedef struct cmdList{
+    cmdNode* head;
+    cmdNode* tail;
+    cmdNode* current;
+    int size;
+} cmdList;
+
 typedef struct list{
     char name[2];
     node* head;

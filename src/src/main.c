@@ -15,6 +15,8 @@ int main(void) {
     phase* currentPhase = &gamePhase;
     gameBoard thisGameptr;
     gameBoard* thisGame = &thisGameptr;
+    cmdList gameCmds = {};
+    cmdList *gameCmdsptr = &gameCmds;
     char command[MAX_INPUT];
     while(1) {
         takeInput(command);
@@ -25,11 +27,13 @@ int main(void) {
             printCurrentView(deckptr, messagesptr);
         }
         if(*currentPhase == G){
+            int visible = 0;
             int eval = evalMoveInput(command);
             if(eval == 1) {
                 list *fromlist = getListByName(command[0], command[1], thisGame);
                 list *toList;
                 node *fromCard;
+
                 if (command[2] == '-' && command[3] == '>') {
                     toList = getListByName(command[4], command[5], thisGame);
                     fromCard = fromlist->tail->prev;
@@ -41,8 +45,11 @@ int main(void) {
                 }
                 if (toList != NULL) {
                     if (fromCard != 0) {
-                        moveCard(fromCard, fromlist, toList, messagesptr);
+                        int visible = moveCard(fromCard, fromlist, toList, messagesptr);
                         messagesptr->lastCmd = command;
+                        if(visible == 1 || visible == 2) {
+                            addCmdNode(command, gameCmdsptr, visible);
+                        }
                     } else {
                         messagesptr->lastCmd = command;
                         messagesptr->message = "Invalid move";
@@ -58,7 +65,9 @@ int main(void) {
             messagesptr->lastCmd = "P\n";
             messagesptr->message = "Invalid move";
             }
-            else{
+            else if(eval == 4){
+                reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, visible);
+            }else{
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Invalid move";
             }

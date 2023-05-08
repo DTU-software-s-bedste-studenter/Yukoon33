@@ -4,8 +4,10 @@
 
 #ifndef YUKOON33_LINKEDLISTS_H
 #define YUKOON33_LINKEDLISTS_H
+#include <string.h>
 #include "structs.h"
 #define DUMMY_VALUE {H, '#'};
+#define DUMMY_CMD "§§§§§";
 
 void initList(list*, char*);
 
@@ -19,6 +21,10 @@ node* getCardByName(char suit, char number, list* list);
 
 list* getListByName(char, char, gameBoard*);
 
-void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
+int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
+
+void reverseMove(char*, cmdList*, gameBoard*, int);
+
+void addCmdNode(char*, cmdList*, int);
 
 #endif //YUKOON33_LINKEDLISTS_H

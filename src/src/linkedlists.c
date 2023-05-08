@@ -204,3 +204,86 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     return;
 
 }
+
+void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int prevVisible){
+    char firstColoum[2];
+    firstColoum[0] = command[0];
+    firstColoum[1] = command[1];
+    char secondColoum[2];
+    char cardZ[2];
+    if(command[2] == ':') {
+        secondColoum[0] = command[7];
+        secondColoum[1] = command[8];
+        cardZ[0] = command[3];
+        cardZ[1] = command[4];
+    } else{
+        secondColoum[0] = command[4];
+        secondColoum[1] = command[5];
+    }
+    list* coloumTo = getListByName(firstColoum[0], firstColoum[1], gameBoard1);
+    list* coloumFrom = getListByName(secondColoum[0],secondColoum[1], gameBoard1);
+    node* thisCard;
+    if(command[2] == ':'){
+        card actual = getCardByName(cardZ[1], cardZ[0], coloumFrom)->data;
+        thisCard = findNode(actual, coloumFrom);
+    } else{
+        thisCard = coloumFrom->tail->prev;
+    }
+    if(coloumFrom->size!=0) {
+        node *prevCard = findNode(thisCard->data, coloumFrom)->prev;
+    }
+    cmdNode* prevCommand = gameCmds->current->prev;
+    if(!prevVisible){
+        coloumTo->tail->prev->data.visible = 0;
+    }
+    while (thisCard->data.number != '#') {
+        addNode(thisCard->data, coloumTo);
+        coloumFrom->size = coloumFrom->size - 1;
+        thisCard = thisCard->next;
+    }
+    prevCard->next = coloumFrom->tail;
+    coloumFrom->tail->prev = prevCard;
+
+    gameCmds->current = gameCmds->current->prev;
+
+
+
+    //012345678
+    //c1:2h->c2
+    //c1->c2
+
+
+}
+
+void addCmdNode(char* data, cmdList* plist, int pastVisible){
+    cmdNode *newNode;
+    newNode = (cmdNode *) malloc(sizeof(cmdNode));
+    char *newData = (char*) malloc(sizeof(data));
+    strcpy(newData ,data);
+    newNode->cmd = newData;
+    if(plist->size == 0){
+        cmdNode *dummy;
+        char* dummyCMD = DUMMY_CMD;
+        dummy = (cmdNode *) malloc(sizeof(cmdNode));
+        dummy->cmd = dummyCMD;
+        plist->head = newNode;
+        plist->tail = dummy;
+        newNode->prev = dummy;
+        newNode->next = dummy;
+        dummy->prev = plist->head;
+        dummy->next = plist->head;
+    } else{
+        cmdNode *secondLast = plist->tail->prev;
+        secondLast->next = newNode;
+        newNode->prev = secondLast;
+        newNode->next = plist->tail;
+        plist->tail->prev = newNode;
+    }
+    if(pastVisible == 2){
+        newNode->pastVisible = 0;
+    } else{
+        newNode->pastVisible = 1;
+    }
+    plist->current = plist->tail->prev;
+    plist->size++;
+}
