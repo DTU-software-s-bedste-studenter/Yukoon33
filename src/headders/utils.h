@@ -10,6 +10,5 @@
 int randomNum();
 void initializeGame(deck*, gameBoard*);
 int evalMoveInput(char*);
-int wrongPhaseErr(messages*);
 int winnerFound(gameBoard*);
 #endif //YUKOON33_UTILS_H

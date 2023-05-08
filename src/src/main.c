@@ -25,17 +25,37 @@ int main(void) {
             printCurrentView(deckptr, messagesptr);
         }
         if(*currentPhase == G){
-            if(evalMoveInput(command)){
-                list* fromlist = getListByName(command[0], command[1], thisGame);
-                list* toList = getListByName(command[7], command[8], thisGame);
-                node* fromCard = getCardByName(command[4], command[3],fromlist);
-                if(fromCard != 0) {
-                    moveCard(fromCard, fromlist, toList);
+            int eval = evalMoveInput(command);
+            if(eval == 1) {
+                list *fromlist = getListByName(command[0], command[1], thisGame);
+                list *toList;
+                node *fromCard;
+                if (command[2] == '-' && command[3] == '>') {
+                    toList = getListByName(command[4], command[5], thisGame);
+                    fromCard = getLastCardFromList(fromlist);
+                } else if (command[2] == ':') {
+                    toList = getListByName(command[7], command[8], thisGame);
+                    fromCard = getCardByName(command[4], command[3], fromlist);
+                } else {
+                    toList = NULL;
+                }
+                if (toList != NULL) {
+                    if (fromCard != 0) {
+                        moveCard(fromCard, fromlist, toList, messagesptr);
+                        messagesptr->lastCmd = command;
+                    } else {
+                        messagesptr->lastCmd = command;
+                        messagesptr->message = "Invalid move";
+                    }
                 } else{
                     //error
                 }
-            } else{
-
+            }else if(eval == 2) {
+                messagesptr->lastCmd = command;
+                messagesptr->message = "OK, game started";
+            }else if(eval == 3){
+            messagesptr->lastCmd = "P";
+            messagesptr->message = "Invalid move";
             }
             printCurrentGame(thisGame, messagesptr);
             if(winnerFound(thisGame)){

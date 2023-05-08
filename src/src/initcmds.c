@@ -23,79 +23,82 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
         display->lastCmd = "LD";
         display->message = "OK";
 
-        cmdLD(filetxt, deck, display);
-        return 1;
-    }
-
-    if(command[0] == 'S' && command[1] == 'W'){
-        cmdSW(deck);
-        display->lastCmd = "SW";
-        display->message = "OK";
-        return 1;
-    }
-    if(command[0] == 'S' && command[1] == 'I') {
-        char numbers[3];
-        for (int i = 0; i < 3; i++) {
-            if (command[i + 3] == '\n') {
-                numbers[i] = '\0';
-                break;
-            } else{
-                numbers[i] = command[i + 3];
-            }
-        }
-        int number;
-        if (command[4] == '\n') {
-            number = (numbers[0] - 48);
-        } else {
-            number = (10 * (numbers[0] - 48)) + (numbers[1] - 48);
-        }
-        if(command[2] != ' '){
-            number = randomNum();
-        }
-        if(number > 52 || 0 > number){
-            display->lastCmd = "SI";
-            display->message = "Number to large, for split";
+            cmdLD(filetxt, deck, display);
             return 1;
-        }
-        cmdSI(deck, number);
-
-        display->lastCmd = "SI";
-        display->message = "OK";
-        return 1;
-    }
-    if(command[0] == 'S' && command[1] == 'R'){
-        cmdSR(deck);
-        display->lastCmd = "SR";
-        display->message = "OK";
-        return 1;
-    }
-    if(command[0] == 'S' && command[1] == 'D'){
-        char filetxt[20];
-        for (int i = 0; i < 20; i++) {
-            filetxt[i] = command[i + 3];
-            if (command[i + 3] == '\n' || command[2] == '\n') {
-                filetxt[i] = '\0';
-                break;
+        } else if (command[0] == 'S' && command[1] == 'W') {
+            cmdSW(deck);
+            display->lastCmd = command;
+            display->message = "OK";
+            return 1;
+        } else if (command[0] == 'S' && command[1] == 'I') {
+            char numbers[3];
+            for (int i = 0; i < 3; i++) {
+                if (command[i + 3] == '\n') {
+                    numbers[i] = '\0';
+                    break;
+                } else {
+                    numbers[i] = command[i + 3];
+                }
             }
+            int number;
+            if (command[4] == '\n') {
+                number = (numbers[0] - 48);
+            } else {
+                number = (10 * (numbers[0] - 48)) + (numbers[1] - 48);
+            }
+            if (command[2] != ' ') {
+                number = randomNum();
+            }
+            if (number > 52 || 0 > number) {
+                display->lastCmd = command;
+                display->message = "Number too large, for split";
+                return 1;
+            }
+            cmdSI(deck, number);
+
+            display->lastCmd = command;
+            display->message = "OK";
+            return 1;
+        } else if (command[0] == 'S' && command[1] == 'R'&& command[2] == '\n') {
+            cmdSR(deck);
+            display->lastCmd = command;
+            display->message = "OK";
+            return 1;
+        } else if (command[0] == 'S' && command[1] == 'D' ) {
+            char filetxt[20];
+            for (int i = 0; i < 20; i++) {
+                filetxt[i] = command[i + 3];
+                if (command[i + 3] == '\n' || command[2] == '\n') {
+                    filetxt[i] = '\0';
+                    break;
+                }
+            }
+            cmdSD(deck, filetxt);
+            display->lastCmd = command;
+            display->message = "OK";
+            return 1;
+        } else if (command[0] == 'Q' && command[1] == 'Q' && command[2] == '\n') {
+            display->lastCmd = command;
+            display->message = "OK - BYE";
+            return cmdQQ();
+        } else if (command[0] == 'P' && command[1] == '\n') {
+            cmdP(deck, newGame, currentPhase);
+            display->lastCmd = command;
+            display->message = "OK";
+        } else{
+            display->lastCmd = command;
+            display->message = "Invalid command";
         }
-        cmdSD(deck, filetxt);
-        display->lastCmd = "SD";
-        display->message = "OK";
-        return 1;
+    } else{
+        if(command[0] == 'Q' && command[1] == '\n'){
+            cmdQ(currentPhase, deck);
+            display->lastCmd = command;
+            display->message = "OK";
+        }
+        if(command[0] == 'P'){
+            command[0] = '*';
+        }
     }
-
-    if (command[0] == 'Q' && command[1] == 'Q') {
-        display->message = "OK - BYE";
-        return cmdQQ();
-    }
-
-    if(command[0] == 'P'){
-        cmdP(deck, newGame, currentPhase);
-    }
-
-    /*if(command[0] == '' && command[1] == ''){
-
-    }*/
 }
 
 void cmdLD(char* filetxt, deck* deck, messages* display){
