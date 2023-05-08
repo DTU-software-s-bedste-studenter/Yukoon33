@@ -11,17 +11,18 @@
  * @return
  */
 int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame, phase* currentPhase) {
-    if (command[0] == 'L' && command[1] == 'D') {
-        char filetxt[20];
-        for (int i = 0; i < 20; i++) {
-            filetxt[i] = command[i + 3];
-            if (command[i + 3] == '\n' || command[2] == '\n') {
-                filetxt[i] = '\0';
-                break;
+    if(*currentPhase == I) {
+        if (command[0] == 'L' && command[1] == 'D') {
+            char filetxt[20];
+            for (int i = 0; i < 20; i++) {
+                filetxt[i] = command[i + 3];
+                if (command[i + 3] == '\n' || command[2] == '\n') {
+                    filetxt[i] = '\0';
+                    break;
+                }
             }
-        }
-        display->lastCmd = "LD";
-        display->message = "OK";
+            display->lastCmd = command;
+            display->message = "OK";
 
             cmdLD(filetxt, deck, display);
             return 1;
@@ -132,6 +133,12 @@ void cmdSW(deck* deck1){
     }
 }
 
+void cmdHD(deck* deck1){
+    for(int i = 0; i < 52;i++) {
+        deck1->deck[i].visible = 0;
+    }
+}
+
 void cmdSI(deck* deck, int split){
     card cards1[split];
     card cards2[52 - split];
@@ -208,8 +215,9 @@ int cmdQQ(){
     return 0;
 }
 
-int cmdQ(phase* currentPhase){
+int cmdQ(phase* currentPhase, deck* currentdeck){
     *currentPhase = I;
+    cmdHD(currentdeck);
 }
 
 int cmdP(deck* currentDeck, gameBoard* board, phase* currentPhase){

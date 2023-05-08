@@ -144,6 +144,7 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             prevCard->data.visible = 1;
+            display->message = "OK";
             return;
         }
     }
@@ -169,7 +170,8 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     }
     if (toPile->name[0] == 'F') {
         if (numbers[firstNumber] != numbers[secondNumber + 1]) {
-            return; //print error statement
+            display->message = "Invalid move";
+            return;
         } else {
             while (tempFromCard->data.number != '#') {
                 addNode(tempFromCard->data, toPile);
@@ -185,7 +187,8 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
         }
     } else if (toPile->name[0] == 'C') {
         if (numbers[firstNumber + 1] != numbers[secondNumber]) {
-            return; //print error statement
+            display->message = "Invalid move";
+            return;
         } else {
             while (tempFromCard->data.number != '#') {
                 addNode(tempFromCard->data, toPile);
@@ -195,8 +198,10 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             prevCard->data.visible = 1;
+            display->message = "OK";
             return;
         }
     }
-    return; //print error statement
+    display->message = "Invalid move";
+    return;
 }

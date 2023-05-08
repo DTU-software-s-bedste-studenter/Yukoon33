@@ -58,8 +58,8 @@ void initializeGame(deck* currentDeck, gameBoard* board){
  */
 int evalMoveInput(char* moveCommand){
     if(moveCommand[0] == 'C'){
-        if(moveCommand[1] < 49 && moveCommand[1] > 55){
-            return 0; //error
+        if(!(moveCommand[1] > 48 && moveCommand[1] < 56)){
+            return 0;
         }
     } else if( moveCommand[0] == 'F'){
         if(!(moveCommand[1] > 48 && moveCommand[1] < 53)){

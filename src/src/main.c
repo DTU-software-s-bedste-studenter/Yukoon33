@@ -48,7 +48,8 @@ int main(void) {
                         messagesptr->message = "Invalid move";
                     }
                 } else{
-                    //error
+                    messagesptr->lastCmd = command;
+                    messagesptr->message = "Invalid move";
                 }
             }else if(eval == 2) {
                 messagesptr->lastCmd = command;
@@ -59,8 +60,9 @@ int main(void) {
             }
             printCurrentGame(thisGame, messagesptr);
             if(winnerFound(thisGame)){
-                //winner message here
-                cmdQ(currentPhase);
+                messagesptr->lastCmd = command;
+                messagesptr->message = "Congratulations, you won the game!";
+                cmdQ(currentPhase, deckptr);
             }
         }
     }
