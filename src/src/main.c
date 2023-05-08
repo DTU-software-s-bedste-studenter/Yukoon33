@@ -32,7 +32,7 @@ int main(void) {
                 node *fromCard;
                 if (command[2] == '-' && command[3] == '>') {
                     toList = getListByName(command[4], command[5], thisGame);
-                    fromCard = getLastCardFromList(fromlist);
+                    fromCard = fromlist->tail->prev;
                 } else if (command[2] == ':') {
                     toList = getListByName(command[7], command[8], thisGame);
                     fromCard = getCardByName(command[4], command[3], fromlist);
@@ -58,12 +58,12 @@ int main(void) {
             messagesptr->lastCmd = "P";
             messagesptr->message = "Invalid move";
             }
-            printCurrentGame(thisGame, messagesptr);
             if(winnerFound(thisGame)){
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Congratulations, you won the game!";
                 cmdQ(currentPhase, deckptr);
             }
+            printCurrentGame(thisGame, messagesptr);
         }
     }
     printf("%s", gameMessages.message);

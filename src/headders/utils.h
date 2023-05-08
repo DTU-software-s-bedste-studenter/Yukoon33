@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include "structs.h"
 #include "linkedlists.h"
-int randomNum();
 void initializeGame(deck*, gameBoard*);
 int evalMoveInput(char*);
 int winnerFound(gameBoard*);

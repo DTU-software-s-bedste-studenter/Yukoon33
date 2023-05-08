@@ -204,10 +204,7 @@ void cmdSD(deck* currentdeck, char* filename){
         file = fopen(filename, "w");
     }
     for(int i = 0; i < 52; i++) {
-        fputc(currentdeck->deck[i].number, file);
-        fputc(currentdeck->deck[i].suit, file);
-        fputc(currentdeck->deck[i].visible, file);
-        fputc('\n', file);
+        fprintf(file, "%c%c%d\n", currentdeck->deck[i].number, currentdeck->deck[i].suit, currentdeck->deck[i].visible);
     }
 }
 

@@ -4,10 +4,6 @@
 
 
 #include "../headders/utils.h"
-int randomNum(){
-    return (rand() % 52);
-}
-
 void initializeGame(deck* currentDeck, gameBoard* board){
     int k = 1;
     int j = 2;

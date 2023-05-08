@@ -6,6 +6,8 @@
 #define YUKOON33_INITCMDS_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "structs.h"
 #include "utils.h"
 int evaluateCmd(char*, deck*, messages*, gameBoard*, phase*);
