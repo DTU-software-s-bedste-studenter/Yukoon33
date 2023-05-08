@@ -50,7 +50,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
             if (command[2] != ' ') {
                 number = randomNum();
             }
-            if (number > 52 || 0 > number) {
+            if (number > 52 || 0 > number || command[5] != '\n') {
                 display->lastCmd = command;
                 display->message = "Number too large, for split";
                 return 1;
@@ -94,7 +94,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
         if(command[0] == 'Q' && command[1] == '\n'){
             cmdQ(currentPhase, deck);
             display->lastCmd = command;
-            display->message = "OK";
+            display->message = "OK, entered STARTUP";
         }
         if(command[0] == 'P'){
             command[0] = '*';
@@ -189,10 +189,11 @@ void cmdSI(deck* deck, int split){
 
 void cmdSR(deck* input){
     for (int i = 0; i < 52; i++){
-        int rand = randomNum();
+        srand(time(0));
+        int random = rand() % 52;
         card tempCard = input->deck[i];
-        input->deck[i] = input->deck[rand];
-        input->deck[rand] = tempCard;
+        input->deck[i] = input->deck[random];
+        input->deck[random] = tempCard;
     }
 }
 
@@ -206,6 +207,7 @@ void cmdSD(deck* currentdeck, char* filename){
     for(int i = 0; i < 52; i++) {
         fprintf(file, "%c%c%d\n", currentdeck->deck[i].number, currentdeck->deck[i].suit, currentdeck->deck[i].visible);
     }
+    fclose(file);
 }
 
 int cmdQQ(){

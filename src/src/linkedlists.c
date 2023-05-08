@@ -103,8 +103,8 @@ node* getLastCardFromList(list* thisList){
  * @param fromPile
  * @param toPile
  */
-// C1H2:C8
-// C6:H2->C4
+
+
 void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
     size_t numbersSize = sizeof(numbers)/sizeof(numbers[0]);
@@ -127,6 +127,7 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             fromPile->size = fromPile->size - 1;
+            prevCard->data.visible = 1;
             display->message = "OK";
             return;
         } else if (toPile->name[0] == 'F') {
@@ -151,11 +152,11 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
 
 
     if (fromCard->data.suit != toPile->tail->prev->data.suit && toPile->name[0] == 'F') {
-        display->message = "Invalid move, can't a card of the different suit to this pile";
+        display->message = "Invalid move, can't move a card of different suit to this pile";
         return;
     }
     if (fromCard->data.suit == toPile->tail->prev->data.suit && toPile->name[0] == 'C') {
-        display->message = "Invalid move, wrong suit";
+        display->message = "Invalid move, can't move a card of same suit to this pile";
         return;
     }
     int firstNumber = 0;
