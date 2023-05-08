@@ -263,14 +263,10 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
 
 
 
-        //012345678
-        //c1:2h->c2
-        //c1->c2
-    } else{
-        command = "U\n";
-        messages1->message = "Can't undo, you are back at the start";
-        messages1->lastCmd = command;
-    }
+    //012345678
+    //c1:2h->c2
+    //c1->c2
+
 
 }
 
