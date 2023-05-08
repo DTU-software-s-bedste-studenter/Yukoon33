@@ -4,10 +4,6 @@
 
 
 #include "../headders/utils.h"
-int randomNum(){
-    return (rand() % 52);
-}
-
 void initializeGame(deck* currentDeck, gameBoard* board){
     int k = 1;
     int j = 2;
@@ -93,7 +89,7 @@ int evalMoveInput(char* moveCommand){
         }
     } else if(moveCommand[2] == '-' && moveCommand[3] == '>'){
         if(moveCommand[4] == 'C'){
-            if(!(moveCommand[5] > 48 && moveCommand < 56)){
+            if(!(moveCommand[5] > 48 && moveCommand[5] < 56)){
                 return 0;
             }
         } else if( moveCommand[4] == 'F'){
