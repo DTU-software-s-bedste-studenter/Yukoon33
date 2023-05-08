@@ -123,7 +123,7 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             fromPile->tail->prev = prevCard;
             fromPile->size = fromPile->size - 1;
             display->message = "OK";
-            if(prevCard->data.visible == 0){
+            if(prevCard->data.visible == 0 && prevCard->data.number != '#'){
                 prevCard->data.visible = 1;
                 return 2;
             }
@@ -143,7 +143,7 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             display->message = "OK";
-            if(prevCard->data.visible == 0){
+            if(prevCard->data.visible == 0 && prevCard->data.number != '#'){
                 prevCard->data.visible = 1;
                 return 2;
             }
@@ -184,7 +184,7 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             fromPile->tail->prev = prevCard;
             toPile->tail->prev->prev->data.visible = 0;
             display->message = "OK";
-            if(prevCard->data.visible == 0){
+            if(prevCard->data.visible == 0 && prevCard->data.number != '#'){
                 prevCard->data.visible = 1;
                 return 2;
             }
@@ -203,7 +203,7 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             display->message = "OK";
-            if(prevCard->data.visible == 0){
+            if(prevCard->data.visible == 0 && prevCard->data.number != '#'){
                 prevCard->data.visible = 1;
                 return 2;
             }
@@ -246,7 +246,7 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
         } else {
             prevCard = coloumFrom->tail;
         }
-        if (!prevVisible && coloumTo->size != 0) {
+        if (prevVisible == 2 && coloumTo->size != 0) {
             if (coloumTo->name[0] == 'C') {
                 coloumTo->tail->prev->data.visible = 0;
             }
