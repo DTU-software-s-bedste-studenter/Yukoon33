@@ -202,4 +202,5 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     }
     display->message = "Invalid move";
     return;
+
 }
