@@ -66,7 +66,7 @@ int main(void) {
             messagesptr->message = "Invalid move";
             }
             else if(eval == 4){
-                reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, visible);
+                reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, visible, messagesptr);
             }else{
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Invalid move";

@@ -23,7 +23,7 @@ list* getListByName(char, char, gameBoard*);
 
 int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
 
-void reverseMove(char*, cmdList*, gameBoard*, int);
+void reverseMove(char*, cmdList*, gameBoard*, int, messages*);
 
 void addCmdNode(char*, cmdList*, int);
 

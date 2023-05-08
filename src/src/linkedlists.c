@@ -215,47 +215,51 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
 
 }
 
-void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int prevVisible){
-    char firstColoum[2];
-    firstColoum[0] = command[0];
-    firstColoum[1] = command[1];
-    char secondColoum[2];
-    char cardZ[2];
-    if(command[2] == ':') {
-        secondColoum[0] = command[7];
-        secondColoum[1] = command[8];
-        cardZ[0] = command[3];
-        cardZ[1] = command[4];
-    } else{
-        secondColoum[0] = command[4];
-        secondColoum[1] = command[5];
-    }
-    list* coloumTo = getListByName(firstColoum[0], firstColoum[1], gameBoard1);
-    list* coloumFrom = getListByName(secondColoum[0],secondColoum[1], gameBoard1);
-    node* thisCard;
-    if(command[2] == ':'){
-        card actual = getCardByName(cardZ[1], cardZ[0], coloumFrom)->data;
-        thisCard = findNode(actual, coloumFrom);
-    } else{
-        thisCard = coloumFrom->tail->prev;
-    }
-    if(coloumFrom->size!=0) {
-        node *prevCard = findNode(thisCard->data, coloumFrom)->prev;
-    }
-    cmdNode* prevCommand = gameCmds->current->prev;
-    if(!prevVisible){
-        coloumTo->tail->prev->data.visible = 0;
-    }
-    while (thisCard->data.number != '#') {
-        addNode(thisCard->data, coloumTo);
-        coloumFrom->size = coloumFrom->size - 1;
-        thisCard = thisCard->next;
-    }
-    
-    prevCard->next = coloumFrom->tail;
-    coloumFrom->tail->prev = prevCard;
+void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int prevVisible, messages* messages1){
+    if(gameCmds->current != gameCmds->tail) {
+        char firstColoum[2];
+        firstColoum[0] = command[0];
+        firstColoum[1] = command[1];
+        char secondColoum[2];
+        char cardZ[2];
+        if (command[2] == ':') {
+            secondColoum[0] = command[7];
+            secondColoum[1] = command[8];
+            cardZ[0] = command[3];
+            cardZ[1] = command[4];
+        } else {
+            secondColoum[0] = command[4];
+            secondColoum[1] = command[5];
+        }
+        list *coloumTo = getListByName(firstColoum[0], firstColoum[1], gameBoard1);
+        list *coloumFrom = getListByName(secondColoum[0], secondColoum[1], gameBoard1);
+        node *thisCard;
+        if (command[2] == ':') {
+            card actual = getCardByName(cardZ[1], cardZ[0], coloumFrom)->data;
+            thisCard = findNode(actual, coloumFrom);
+        } else {
+            thisCard = coloumFrom->tail->prev;
+        }
+        node *prevCard;
+        if (coloumFrom->size > 1) {
+            prevCard = findNode(thisCard->data, coloumFrom)->prev;
+        } else {
+            prevCard = coloumFrom->tail;
+        }
+        if (!prevVisible && coloumTo->size != 0) {
+            if (coloumTo->name[0] == 'C') {
+                coloumTo->tail->prev->data.visible = 0;
+            }
+        }
+        while (thisCard->data.number != '#') {
+            addNode(thisCard->data, coloumTo);
+            coloumFrom->size = coloumFrom->size - 1;
+            thisCard = thisCard->next;
+        }
 
-    gameCmds->current = gameCmds->current->prev;
+        prevCard->next = coloumFrom->tail;
+        coloumFrom->tail->prev = prevCard;
+        gameCmds->current = gameCmds->current->prev;
 
 
 
