@@ -64,10 +64,8 @@ card* getByIndex(int index, list* list){
 
 node* getCardByName(char suit, char number, list* fromlist){
     node* tempnode = fromlist->head;
-    card* tempcard = &tempnode->data;
-    while(tempcard->number != '#'){
-        tempcard = &tempnode->data;
-        if(tempcard->suit == suit && tempcard->number ==  number && tempcard->visible == 1){
+    while(tempnode->data.number != '#'){
+        if(tempnode->data.suit == suit && tempnode->data.number ==  number && tempnode->data.visible == 1){
             return tempnode;
         }
         tempnode = tempnode->next;
@@ -102,14 +100,14 @@ list* getListByName(char column, char number, gameBoard* gameBoard1){
  */
 
 
-void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
+int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     char numbers[14] = {'A', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'NULL'};
     size_t numbersSize = sizeof(numbers)/sizeof(numbers[0]);
 
     node* tempFromCard = fromCard;
     if(tempFromCard->data.visible == 0){
         display->message = "Invalid move, card not visible";
-        return;
+        return 0;
     }
     node* prevCard = findNode(fromCard->data, fromPile)->prev;
 
@@ -118,21 +116,24 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             if (fromPile->tail->prev->data.number != fromCard->data.number ||
                 fromPile->tail->prev->data.suit != fromCard->data.suit) {
                 display->message = "Invalid move, only one card at a time to F-piles";
-                return;
+                return 0;
             }
             addNode(fromCard->data, toPile);
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             fromPile->size = fromPile->size - 1;
-            prevCard->data.visible = 1;
             display->message = "OK";
-            return;
+            if(prevCard->data.visible == 0){
+                prevCard->data.visible = 1;
+                return 2;
+            }
+            return 1;
         } else if (toPile->name[0] == 'F') {
             display->message = "Invalid move, needs to be Ace";
-            return;
+            return 0;
         } else if(toPile->name[0] == 'C' && fromCard->data.number != 'K') {
             display->message = "Invalid move, you can only move a king to an empty C-pile";
-            return;
+            return 0;
         } else{
             while (tempFromCard->data.number != '#') {
                 addNode(tempFromCard->data, toPile);
@@ -141,20 +142,23 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             }
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
-            prevCard->data.visible = 1;
             display->message = "OK";
-            return;
+            if(prevCard->data.visible == 0){
+                prevCard->data.visible = 1;
+                return 2;
+            }
+            return 1;
         }
     }
 
 
     if (fromCard->data.suit != toPile->tail->prev->data.suit && toPile->name[0] == 'F') {
         display->message = "Invalid move, can't move a card of different suit to this pile";
-        return;
+        return 0;
     }
     if (fromCard->data.suit == toPile->tail->prev->data.suit && toPile->name[0] == 'C') {
         display->message = "Invalid move, can't move a card of same suit to this pile";
-        return;
+        return 0;
     }
     int firstNumber = 0;
     int secondNumber = 0;
@@ -169,7 +173,7 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
     if (toPile->name[0] == 'F') {
         if (numbers[firstNumber] != numbers[secondNumber + 1]) {
             display->message = "Invalid move";
-            return;
+            return 0;
         } else {
             while (tempFromCard->data.number != '#') {
                 addNode(tempFromCard->data, toPile);
@@ -178,15 +182,18 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             }
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
-            prevCard->data.visible = 1;
             toPile->tail->prev->prev->data.visible = 0;
             display->message = "OK";
-            return;
+            if(prevCard->data.visible == 0){
+                prevCard->data.visible = 1;
+                return 2;
+            }
+            return 1;
         }
     } else if (toPile->name[0] == 'C') {
         if (numbers[firstNumber + 1] != numbers[secondNumber]) {
             display->message = "Invalid move";
-            return;
+            return 0;
         } else {
             while (tempFromCard->data.number != '#') {
                 addNode(tempFromCard->data, toPile);
@@ -195,13 +202,16 @@ void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             }
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
-            prevCard->data.visible = 1;
             display->message = "OK";
-            return;
+            if(prevCard->data.visible == 0){
+                prevCard->data.visible = 1;
+                return 2;
+            }
+            return 1;
         }
     }
     display->message = "Invalid move";
-    return;
+    return 0;
 
 }
 
@@ -241,6 +251,7 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
         coloumFrom->size = coloumFrom->size - 1;
         thisCard = thisCard->next;
     }
+    
     prevCard->next = coloumFrom->tail;
     coloumFrom->tail->prev = prevCard;
 
