@@ -11,8 +11,6 @@ void initList(list*, char*);
 
 void addNode(card, list*);
 
-card* findCard(card card, list *list);
-
 node* findNode(card card, list* list);
 
 card* getByIndex(int index, list* list);
@@ -20,8 +18,6 @@ card* getByIndex(int index, list* list);
 node* getCardByName(char suit, char number, list* list);
 
 list* getListByName(char, char, gameBoard*);
-
-node* getLastCardFromList(list*);
 
 void moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
 
