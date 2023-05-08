@@ -48,7 +48,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
                 number = (10 * (numbers[0] - 48)) + (numbers[1] - 48);
             }
             if (command[2] != ' ') {
-                number = randomNum();
+                number = rand()%52;
             }
             if (number > 52 || 0 > number || command[5] != '\n') {
                 display->lastCmd = command;

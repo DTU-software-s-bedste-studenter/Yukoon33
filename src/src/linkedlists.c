@@ -83,9 +83,6 @@ list* getListByName(char column, char number, gameBoard* gameBoard1){
     }
 }
 
-node* getLastCardFromList(list* thisList){
-    return thisList->tail->prev;
-}
 
 /**
  * first we check if the card is in the pile, if not: error. if it is
