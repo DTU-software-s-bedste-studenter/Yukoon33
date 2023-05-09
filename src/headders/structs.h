@@ -63,13 +63,4 @@ typedef struct gameBoard{
     list board[11];
 } gameBoard;
 
-typedef struct gameState{
-    phase currentPhase;
-    deck currentDeck;
-    char* message;
-    char* lastCommand;
-} gameState;
-
-
-
 #endif //YUKOON33_STRUCTS_H
