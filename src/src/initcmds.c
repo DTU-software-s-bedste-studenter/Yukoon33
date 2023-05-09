@@ -10,7 +10,7 @@
  * @param display pointer for the messages that will be shown.
  * @return
  */
-int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame, phase* currentPhase) {
+int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame, phase* currentPhase, cmdList* cmdList1) {
     if(*currentPhase == I) {
         if (command[0] == 'L' && command[1] == 'D') {
             char filetxt[20];
@@ -92,7 +92,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
         }
     } else{
         if(command[0] == 'Q' && command[1] == '\n'){
-            cmdQ(currentPhase, deck);
+            cmdQ(currentPhase, deck, cmdList1);
             display->lastCmd = command;
             display->message = "OK, entered STARTUP";
         }
@@ -214,7 +214,11 @@ int cmdQQ(){
     return 0;
 }
 
-int cmdQ(phase* currentPhase, deck* currentdeck){
+int cmdQ(phase* currentPhase, deck* currentdeck, cmdList* cmdList1){
+    cmdList1->size = (int) NULL;
+    cmdList1->tail = NULL;
+    cmdList1->head = NULL;
+    cmdList1->current = NULL;
     *currentPhase = I;
     cmdHD(currentdeck);
 }
