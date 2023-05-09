@@ -28,7 +28,13 @@ int main(void) {
         }
         if(*currentPhase == G){
             int eval = evalMoveInput(command);
-            if(eval == 1) {
+            if(eval == 5){
+                for(int i = 0; i < strlen(gameCmds.current->next->cmd); ++i) {
+                    command[i] = gameCmdsptr->current->next->cmd[i];
+                }
+
+            }
+            if(eval == 1 || eval == 5) {
                 list *fromlist = getListByName(command[0], command[1], thisGame);
                 list *toList;
                 node *fromCard;
@@ -57,19 +63,31 @@ int main(void) {
                     messagesptr->lastCmd = command;
                     messagesptr->message = "Invalid move";
                 }
-            }else if(eval == 2) {
+                if(eval == 5) {
+                    if (gameCmds.current->next->cmd[0] == gameCmds.tail->cmd[0]) {
+                        messagesptr->lastCmd = "R\n";
+                        messagesptr->message = "Can't redo, there is nothing to redo";
+                    } else {
+                        messagesptr->lastCmd = "R\n";
+                        messagesptr->message = "OK";
+                        gameCmds.current = gameCmds.current->next;
+                        gameCmds.size = gameCmds.size + 1;
+                    }
+                }
+            } else if(eval == 2) {
                 messagesptr->lastCmd = command;
                 messagesptr->message = "OK, game started";
-            }else if(eval == 3){
+            } else if(eval == 3){
             messagesptr->lastCmd = "P\n";
             messagesptr->message = "Invalid move";
-            }
-            else if(eval == 4){
+            } else if(eval == 4){
                 reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, messagesptr);
-            }else{
+            } else {
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Invalid move";
             }
+
+
             if(winnerFound(thisGame)){
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Congratulations, you won the game!";
