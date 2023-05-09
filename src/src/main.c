@@ -45,9 +45,9 @@ int main(void) {
                 }
                 if (toList != NULL) {
                     if (fromCard != 0) {
-                        int visible = moveCard(fromCard, fromlist, toList, messagesptr);
+                        visible = moveCard(fromCard, fromlist, toList, messagesptr);
                         messagesptr->lastCmd = command;
-                        if(visible == 1 || visible == 2) {
+                        if(visible == 1 || visible == 2 || visible == 3) {
                             addCmdNode(command, gameCmdsptr, visible);
                         }
                     } else {

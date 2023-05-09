@@ -217,6 +217,7 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
 
 void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int prevVisible, messages* messages1){
     if(gameCmds->current != gameCmds->tail) {
+        int pastVisible = gameCmds->current->pastVisible;
         char firstColoum[2];
         firstColoum[0] = command[0];
         firstColoum[1] = command[1];
@@ -246,7 +247,7 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
         } else {
             prevCard = coloumFrom->tail;
         }
-        if (!prevVisible && coloumTo->size != 0) {
+        if (!pastVisible && coloumTo->size != 0) {
             if (coloumTo->name[0] == 'C') {
                 coloumTo->tail->prev->data.visible = 0;
             }
@@ -285,6 +286,7 @@ void addCmdNode(char* data, cmdList* plist, int pastVisible){
         char* dummyCMD = DUMMY_CMD;
         dummy = (cmdNode *) malloc(sizeof(cmdNode));
         dummy->cmd = dummyCMD;
+        dummy->pastVisible = 1;
         plist->head = newNode;
         plist->tail = dummy;
         newNode->prev = dummy;
