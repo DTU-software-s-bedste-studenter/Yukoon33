@@ -21,7 +21,7 @@ int main(void) {
     int visible;
     while(1) {
         takeInput(command);
-        if(!evaluateCmd(command, deckptr, messagesptr, thisGame, currentPhase)){
+        if(!evaluateCmd(command, deckptr, messagesptr, thisGame, currentPhase, gameCmdsptr)){
             break;
         }
         if(*currentPhase == I) {
@@ -30,8 +30,10 @@ int main(void) {
         if(*currentPhase == G){
             int eval = evalMoveInput(command);
             if(eval == 5){
-                for(int i = 0; i < strlen(gameCmds.current->next->cmd); ++i) {
-                    command[i] = gameCmdsptr->current->next->cmd[i];
+                if(gameCmds.current!=NULL){
+                    for (int i = 0; i < strlen(gameCmds.current->next->cmd); ++i) {
+                        command[i] = gameCmdsptr->current->next->cmd[i];
+                    }
                 }
 
             }
@@ -67,7 +69,7 @@ int main(void) {
                     messagesptr->message = "Invalid move";
                 }
                 if(eval == 5) {
-                    if (gameCmds.current->next->cmd[0] == gameCmds.tail->cmd[0]) {
+                    if (gameCmds.current == NULL || gameCmds.current->next->cmd[0] == gameCmds.tail->cmd[0]) {
                         messagesptr->lastCmd = "R\n";
                         messagesptr->message = "Can't redo, there is nothing to redo";
                     } else {
@@ -83,9 +85,13 @@ int main(void) {
             } else if(eval == 3){
             messagesptr->lastCmd = "P\n";
             messagesptr->message = "Invalid move";
-            } else if(eval == 4){
+            } else if(eval == 4 && gameCmds.current != NULL){
                 reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, messagesptr);
-            } else {
+            } else if(eval == 4 && gameCmds.current == NULL){
+                messagesptr->lastCmd = command;
+                messagesptr->message = "Can't undo, you are back at the start";
+            }
+            else{
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Invalid move";
             }
@@ -94,7 +100,7 @@ int main(void) {
             if(winnerFound(thisGame)){
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Congratulations, you won the game!";
-                cmdQ(currentPhase, deckptr);
+                cmdQ(currentPhase, deckptr, gameCmdsptr);
             }
             printCurrentGame(thisGame, messagesptr);
         }

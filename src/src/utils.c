@@ -89,6 +89,8 @@ int evalMoveInput(char* moveCommand){
             if(!(moveCommand[8] > 48 && moveCommand[1] < 53)){
                 return 0;
             }
+        } else if(moveCommand[7] != 'F' && moveCommand[7] != 'C'){
+            return 0;
         }
         if(moveCommand[0] == moveCommand[7] && moveCommand[1] == moveCommand[8]){
             return 0;

@@ -10,7 +10,7 @@
 #include <time.h>
 #include "structs.h"
 #include "utils.h"
-int evaluateCmd(char*, deck*, messages*, gameBoard*, phase*);
+int evaluateCmd(char*, deck*, messages*, gameBoard*, phase*, cmdList*);
 void cmdLD(char*, deck*,  messages*);
 void cmdSW(deck*);
 void cmdHD(deck*);
@@ -19,5 +19,5 @@ void cmdSR(deck*);
 void cmdSD(deck*, char*);
 int cmdQQ();
 int cmdP(deck*, gameBoard*,  phase*);
-int cmdQ(phase*, deck*);
+int cmdQ(phase*, deck*, cmdList*);
 #endif //YUKOON33_INITCMDS_H
