@@ -84,7 +84,7 @@ int main(void) {
                 messagesptr->message = "OK, game started";
             } else if(eval == 3){
             messagesptr->lastCmd = "P\n";
-            messagesptr->message = "Invalid move";
+            messagesptr->message = "Command not available in the PLAY phase";
             } else if(eval == 4 && gameCmds.current != NULL){
                 reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, messagesptr);
             } else if(eval == 4 && gameCmds.current == NULL){
