@@ -269,16 +269,16 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, messag
             coloumFrom->size = coloumFrom->size - 1;
             thisCard = thisCard->next;
         }
-
         prevCard->next = coloumFrom->tail;
         coloumFrom->tail->prev = prevCard;
         gameCmds->current = gameCmds->current->prev;
         gameCmds->size = gameCmds->size-1;
-
-
-        //012345678
-        //c1:2h->c2
-        //c1->c2
+        if(coloumFrom->name[0] == 'F'){
+            coloumFrom->tail->prev->data.visible = 1;
+        }
+        command = "U\n";
+        messages1->message = "OK";
+        messages1->lastCmd = command;
     } else{
         command = "U\n";
         messages1->message = "Can't undo, you are back at the start";
@@ -314,9 +314,7 @@ void addCmdNode(char* data, cmdList* plist, int pastVisible){
     }
     if(pastVisible == 2){
         newNode->pastVisible = 0;
-    } else if(pastVisible == 1){
-        newNode->pastVisible = 1;
-    } else{
+    } else {
         newNode->pastVisible = 1;
     }
     plist->current = plist->tail->prev;

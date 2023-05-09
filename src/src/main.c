@@ -18,6 +18,7 @@ int main(void) {
     cmdList gameCmds = {};
     cmdList *gameCmdsptr = &gameCmds;
     char command[MAX_INPUT];
+    int visible;
     while(1) {
         takeInput(command);
         if(!evaluateCmd(command, deckptr, messagesptr, thisGame, currentPhase)){
@@ -50,10 +51,12 @@ int main(void) {
                 }
                 if (toList != NULL) {
                     if (fromCard != 0) {
-                        int visible = moveCard(fromCard, fromlist, toList, messagesptr);
+                        visible = moveCard(fromCard, fromlist, toList, messagesptr);
                         messagesptr->lastCmd = command;
                         if(visible == 1 || visible == 2 || visible == 3) {
-                            addCmdNode(command, gameCmdsptr, visible);
+                            if(eval!=5) {
+                                addCmdNode(command, gameCmdsptr, visible);
+                            }
                         }
                     } else {
                         messagesptr->lastCmd = command;

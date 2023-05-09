@@ -7,7 +7,7 @@
 #include <string.h>
 #include "structs.h"
 #define DUMMY_VALUE {H, '#'};
-#define DUMMY_CMD "§§§§§";
+#define DUMMY_CMD "!!!!"
 
 void initList(list*, char*);
 
@@ -23,7 +23,7 @@ list* getListByName(char, char, gameBoard*);
 
 int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display);
 
-void reverseMove(char*, cmdList*, gameBoard*, int, messages*);
+void reverseMove(char*, cmdList*, gameBoard*, messages*);
 
 void addCmdNode(char*, cmdList*, int);
 
