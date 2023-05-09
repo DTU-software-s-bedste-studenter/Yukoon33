@@ -123,6 +123,9 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             fromPile->tail->prev = prevCard;
             fromPile->size = fromPile->size - 1;
             display->message = "OK";
+            if(prevCard->data.number == '#'){
+                return 3;
+            }
             if(prevCard->data.visible == 0){
                 prevCard->data.visible = 1;
                 return 2;
@@ -143,6 +146,9 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             display->message = "OK";
+            if(prevCard->data.number == '#'){
+                return 3;
+            }
             if(prevCard->data.visible == 0){
                 prevCard->data.visible = 1;
                 return 2;
@@ -184,6 +190,9 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             fromPile->tail->prev = prevCard;
             toPile->tail->prev->prev->data.visible = 0;
             display->message = "OK";
+            if(prevCard->data.number == '#'){
+                return 3;
+            }
             if(prevCard->data.visible == 0){
                 prevCard->data.visible = 1;
                 return 2;
@@ -203,6 +212,9 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
             prevCard->next = fromPile->tail;
             fromPile->tail->prev = prevCard;
             display->message = "OK";
+            if(prevCard->data.number == '#'){
+                return 3;
+            }
             if(prevCard->data.visible == 0){
                 prevCard->data.visible = 1;
                 return 2;
@@ -261,7 +273,7 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
         prevCard->next = coloumFrom->tail;
         coloumFrom->tail->prev = prevCard;
         gameCmds->current = gameCmds->current->prev;
-
+        gameCmds->size = gameCmds->size-1;
 
 
         //012345678
@@ -293,15 +305,17 @@ void addCmdNode(char* data, cmdList* plist, int pastVisible){
         newNode->next = dummy;
         dummy->prev = plist->head;
         dummy->next = plist->head;
-    } else{
-        cmdNode *secondLast = plist->tail->prev;
-        secondLast->next = newNode;
-        newNode->prev = secondLast;
+    } else {
+        cmdNode *lastNode = plist->current;
+        lastNode->next = newNode;
+        newNode->prev = lastNode;
         newNode->next = plist->tail;
         plist->tail->prev = newNode;
     }
     if(pastVisible == 2){
         newNode->pastVisible = 0;
+    } else if(pastVisible == 1){
+        newNode->pastVisible = 1;
     } else{
         newNode->pastVisible = 1;
     }
