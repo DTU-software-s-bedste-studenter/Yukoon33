@@ -28,34 +28,47 @@ void printCurrentView(deck* deck1, messages* display){
         printf("\n\n\n\n\n\n\n\n\n\n");
     }
     //printTitle();
-    for(int i = 1; i < 8; i++){
-        printf("C%d\t", i);
-    }
-    printf("\n\n");
-    int k = 0;
-    for(int j = 0; j<8; j++) {
+    if(deck1->deck[0].number != 0) {
         for (int i = 1; i < 8; i++) {
-            if(k > 51){
-                printf("\t");
-                continue;
-            } else if(deck1->deck[k].visible) {
-                printf("%c%c\t", deck1->deck[k].number, deck1->deck[k].suit);
-            } else{
-                printf("[]\t");
-            }
-            k++;
+            printf("C%d\t", i);
         }
-        if(j%2 == 0) {
-            printf("[] : F%d\n", j);
-        } else{
-            printf("\n");
+        printf("\n\n");
+        int k = 0;
+        for (int j = 0; j < 8; j++) {
+            for (int i = 1; i < 8; i++) {
+                if (k > 51) {
+                    printf("\t");
+                    continue;
+                } else if (deck1->deck[k].visible) {
+                    printf("%c%c\t", deck1->deck[k].number, deck1->deck[k].suit);
+                } else {
+                    printf("[]\t");
+                }
+                k++;
+            }
+            if (j % 2 == 0) {
+                printf("[] : F%d\n", j);
+            } else {
+                printf("\n");
+            }
+        }
+    }else{
+        for(int i = 1; i < 8; i++){
+            printf("C%d\t", i);
+        }
+        printf("\n\n");
+        for(int j = 1; j<5; j++) {
+            for (int i = 1; i < 8; i++) {
+                printf("\t");
+            }
+            printf("[] : F%d\n\n", j);
         }
     }
-    printf("\nLAST Command: ");
-    printf("%s", display->lastCmd);
-    printf("Message: ");
-    printf("%s", display->message);
-    printf("\nINPUT > ");
+        printf("\nLAST Command: ");
+        printf("%s", display->lastCmd);
+        printf("Message: ");
+        printf("%s", display->message);
+        printf("\nINPUT > ");
 }
 
 void printCurrentGame(gameBoard* currentGame, messages* display){
