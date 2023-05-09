@@ -1,0 +1,28 @@
+---
+title: Domain model
+---
+classDiagram
+    Card "52" -- "1" Deck
+    Deck "1" -- "1" GameBoard
+    Game "1" -- "1" GameBoard
+
+    class Card {
+        Number
+        Suit
+        isVisible
+    }
+
+    class Deck {
+        Cards
+    }
+
+    class Game {
+        Commands
+        GameLoop
+        Phase
+    }
+
+    class GameBoard {
+        Columns
+        Foundations
+    }

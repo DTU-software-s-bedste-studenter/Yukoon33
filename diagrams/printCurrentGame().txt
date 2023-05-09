@@ -1,0 +1,17 @@
+---
+title: printCurrentGame()
+---
+flowchart TD
+    A1[Clear console and print title]
+    A[Loop through each card in every column]
+    A1 --> A
+    A --> B{Is card visible?}
+    B -- no --> B_false[Show as hidden card]
+    B -- yes --> B_true[Show number and suit of card]
+    B_false & B_true --> C[Are we done?]
+    C -- no --> A
+    C -- yes --> D[Loop through every foundation]
+    D --> E[Show number and suit of top card]
+    E --> F[Are we done?]
+    F -- no --> D
+    F -- yes --> G[Print last command, status message\n and input line]

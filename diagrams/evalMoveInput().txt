@@ -1,0 +1,9 @@
+---
+title: evalMoveInput()
+---
+flowchart TD
+    A{Is the command valid\n during this game phase?}
+    A -- yes --> B{Is it a game move\n or move command?}
+    A -- no --> X[Return error code]
+    B -- game move --> C[Execute game move]
+    B -- move command --> D[Execute move command]

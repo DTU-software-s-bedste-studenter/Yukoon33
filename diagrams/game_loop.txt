@@ -1,0 +1,13 @@
+---
+title: Game loop
+---
+flowchart TD
+    A[Read input from user]
+    B{Is command valid and are\n we in the correct phase?}
+    A --> B
+    B -- no --> B_false[Display error message]
+    B_false --> A
+    B -- yes ---> B_true[Execute command and update view]
+    B_true --> C{Is a winner found?}
+    C -- no --> A
+    C -- yes --> C_true[Display winner message\n and close program]
