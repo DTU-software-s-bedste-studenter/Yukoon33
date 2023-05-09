@@ -27,7 +27,6 @@ int main(void) {
             printCurrentView(deckptr, messagesptr);
         }
         if(*currentPhase == G){
-            int visible = 0;
             int eval = evalMoveInput(command);
             if(eval == 1) {
                 list *fromlist = getListByName(command[0], command[1], thisGame);
@@ -45,7 +44,7 @@ int main(void) {
                 }
                 if (toList != NULL) {
                     if (fromCard != 0) {
-                        visible = moveCard(fromCard, fromlist, toList, messagesptr);
+                        int visible = moveCard(fromCard, fromlist, toList, messagesptr);
                         messagesptr->lastCmd = command;
                         if(visible == 1 || visible == 2 || visible == 3) {
                             addCmdNode(command, gameCmdsptr, visible);
@@ -66,7 +65,7 @@ int main(void) {
             messagesptr->message = "Invalid move";
             }
             else if(eval == 4){
-                reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, visible, messagesptr);
+                reverseMove(gameCmdsptr->current->cmd, gameCmdsptr, thisGame, messagesptr);
             }else{
                 messagesptr->lastCmd = command;
                 messagesptr->message = "Invalid move";

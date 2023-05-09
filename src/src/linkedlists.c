@@ -227,9 +227,9 @@ int moveCard(node* fromCard, list* fromPile, list* toPile, messages* display) {
 
 }
 
-void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int prevVisible, messages* messages1){
+void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, messages* messages1){
     if(gameCmds->current != gameCmds->tail) {
-        int pastVisible = gameCmds->current->pastVisible;
+        int lastVisible = gameCmds->current->pastVisible;
         char firstColoum[2];
         firstColoum[0] = command[0];
         firstColoum[1] = command[1];
@@ -259,7 +259,7 @@ void reverseMove(char* command, cmdList* gameCmds, gameBoard* gameBoard1, int pr
         } else {
             prevCard = coloumFrom->tail;
         }
-        if (!pastVisible && coloumTo->size != 0) {
+        if (!lastVisible && coloumTo->size != 0) {
             if (coloumTo->name[0] == 'C') {
                 coloumTo->tail->prev->data.visible = 0;
             }
