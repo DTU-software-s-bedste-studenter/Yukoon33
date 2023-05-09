@@ -7,7 +7,7 @@ void printInitialView(){
     for (int n = 0; n < 10; n++) {
         printf("\n\n\n\n\n\n\n\n\n\n");
     }
-    //printTitle();
+    printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -27,7 +27,7 @@ void printCurrentView(deck* deck1, messages* display){
     for (int n = 0; n < 10; n++) {
         printf("\n\n\n\n\n\n\n\n\n\n");
     }
-    //printTitle();
+    printTitle();
     if(deck1->deck[0].number != 0) {
         for (int i = 1; i < 8; i++) {
             printf("C%d\t", i);
@@ -75,7 +75,7 @@ void printCurrentGame(gameBoard* currentGame, messages* display){
     for (int n = 0; n < 10; n++) {
         printf("\n\n\n\n\n\n\n\n\n\n");
     }
-    //printTitle();
+    printTitle();
     for(int i = 1; i < 8; i++){
         printf("C%d\t", i);
     }
@@ -136,7 +136,7 @@ void printTitle(){
     printf("     \\\\ //  ||  || || //   ||  || ||  || ||\\ ||       333     333\n");
     printf("      \\//   ||  || ||||    ||  || ||  || ||\\\\||     333     333  \n");
     printf("     ///    ||  || || \\\\   ||  || ||  || || \\||       333     333\n");
-    printf("    ///     ⎣⎣__⎦⎦ ||  \\\\  ⎣⎣__⎦⎦ ⎣⎣__⎦⎦ ||  ||    3333    3333 \n");
+    printf("    ///     ||__|| ||  \\\\  ||__|| ||__|| ||  ||    3333    3333 \n");
     printf("---------------------------------------------------------------------\n");
 }
 

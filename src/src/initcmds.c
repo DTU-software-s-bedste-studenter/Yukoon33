@@ -26,7 +26,7 @@ int evaluateCmd(char* command, deck* deck, messages* display, gameBoard* newGame
 
             cmdLD(filetxt, deck, display);
             return 1;
-        } else if (command[0] == 'S' && command[1] == 'W') {
+        } else if (command[0] == 'S' && command[1] == 'W' && command[2] == '\n') {
             cmdSW(deck);
             display->lastCmd = command;
             display->message = "OK";

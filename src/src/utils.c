@@ -95,6 +95,9 @@ int evalMoveInput(char* moveCommand){
         if(moveCommand[0] == moveCommand[7] && moveCommand[1] == moveCommand[8]){
             return 0;
         }
+        if(moveCommand[9] != '\n'){
+            return 0;
+        }
     } else if(moveCommand[2] == '-' && moveCommand[3] == '>'){
         if(moveCommand[4] == 'C'){
             if(!(moveCommand[5] > 48 && moveCommand[5] < 56)){
@@ -105,6 +108,9 @@ int evalMoveInput(char* moveCommand){
                 return 0;
             }
         } else{
+            return 0;
+        }
+        if(moveCommand[6] != '\n'){
             return 0;
         }
     } else if(moveCommand[0] == 'P'){
